@@ -1,0 +1,95 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Lusian Manolov",
+      "email": "sunni98@abv.bg",
+      "password": "123",
+      "role": 1,
+      "isBlocked": false
+    },
+    {
+      "id": 2,
+      "name": "Martin Tsendov",
+      "email": "captainjimo@gmail.com",
+      "password": "123",
+      "role": 0,
+      "isBlocked": false
+    },
+    {
+      "id": 3,
+      "name": "Alexander Dimitrov",
+      "email": "alejandro123@abv.bg",
+      "password": "123",
+      "role": 0,
+      "isBlocked": false
+    },
+    {
+      "id": 4,
+      "name": "Pesho Kelesho",
+      "email": "pesho123@gmail.com",
+      "password": "123",
+      "role": 0,
+      "isBlocked": false
+    },
+    {
+      "id": 5,
+      "name": "Sunkatta",
+      "email": "sunkatta@abv.bg",
+      "password": "123456",
+      "role": 0,
+      "isBlocked": false
+    },
+    {
+      "id": 6,
+      "name": "Gosho Mosho",
+      "email": "gosho@abv.bg",
+      "password": "123456",
+      "role": 0,
+      "isBlocked": false
+    }
+  ],
+  "courses": [
+    {
+      "id": "19037123-d7c0-48a5-a64d-66b7ebdde7a8",
+      "title": "Single Page Applications with Angular",
+      "description": "Learn how to build modern websites with cutting-edge technology!",
+      "image": "https://picsum.photos/200/300",
+      "students": [
+        {
+          "name": "Martin Tsendov",
+          "id": 2
+        },
+        {
+          "name": "Lusian Manolov",
+          "id": 1
+        }
+      ],
+      "rating": 4
+    },
+    {
+      "id": "cea1afbf-ec10-4469-88fb-d6f879413f7e",
+      "title": "Introduction to Programming with C#",
+      "description": "If you want to learn programming but don't know where to start, this is the course for you!!!",
+      "image": "https://picsum.photos/200/300",
+      "students": [],
+      "rating": 3
+    },
+    {
+      "id": "f0ec2f81-4b74-4a20-9ed2-7103dfdb2e54",
+      "title": "DB Apps with Entity Framework",
+      "description": "Learn how to build monolithic web applications with the help of ASP.NET Core and Entity Framework Core!",
+      "image": "https://picsum.photos/200/300",
+      "students": [],
+      "rating": 0
+    },
+    {
+      "id": "d3549092-5d62-4414-b40c-de3df82d38e6",
+      "title": "Game Development with C++ and Unreal Engine",
+      "description": "Always wanted to make games? Join this course and make your dreams come true!",
+      "image": "https://picsum.photos/200/300",
+      "students": [],
+      "rating": 0
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+.course-item {
+    border: 1px solid gray;
+    text-align: center;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    cursor: pointer;
+}
+
+.edit-btn {
+    position: absolute;
+    top: 5px;
+    right: 40px;
+    cursor: pointer;
+}

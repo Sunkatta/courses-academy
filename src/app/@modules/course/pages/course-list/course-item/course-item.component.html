@@ -1,0 +1,50 @@
+<div class="course-item" style="min-height: 80vh; position: relative;">
+  <div *ngIf="isAdmin">
+    <span class="edit-btn" (click)="onCourseEdit()">
+      E
+    </span>
+    <span 
+      class="delete-btn" 
+      tooltip="Delete" 
+      placement="top" 
+      container="body" 
+      (click)="onDeleteClicked()">
+      X
+    </span>
+  </div>
+  <div class="image-holder">
+    <img class="course-img" src="{{ course.image }}" alt="CoursePic">
+  </div>
+  <div class="info-holder">
+    <span>Title: </span><span>{{ course.title }}</span>
+    <br>
+    <div style="margin-bottom: 60px">
+      <span>Description: {{ course.description }}</span>
+    </div>
+    <div *ngIf="isLogged" class="mb-3" style="position: absolute; bottom: 0">
+      <div>
+        <span>Total Students: {{ course.students.length }}</span>
+      </div>
+      <app-rating 
+        style="text-align: left"
+        [rating]='course.rating' 
+        [itemId]='course.id' 
+        (ratingClick)='ratingComponentClick($event)'>
+      </app-rating>
+      <div class="row" *ngIf="canAssign; else alreadyJoined">
+        <button 
+          class="justify-content-end ml-5 btn btn-primary" 
+          (click)="onJoinCourse()">
+          Join Course
+        </button>
+      </div>
+      <ng-template #alreadyJoined>
+        <div class="row">
+          <button class="justify-content-end ml-5 btn btn-primary" disabled>
+            Already Joined
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

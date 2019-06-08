@@ -1,0 +1,71 @@
+<div class="user-form-holder mt-3">
+  <form 
+    [formGroup]="courseForm" 
+    (ngSubmit)="onFormSubmit()"
+    autocomplete="off">
+    <div class="row">
+      <div class="offset-2 col-8">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            name="title"
+            formControlName="title">
+            <span class="text-danger" *ngIf="!courseForm.get('title').valid && courseForm.get('title').touched">
+              This field is required!
+            </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="offset-2 col-8">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            name="description"
+            formControlName="description">
+            <span 
+              class="text-danger" 
+              *ngIf="!courseForm.get('description').valid && courseForm.get('description').touched">
+              <span *ngIf="courseForm.get('description').errors.required">
+                This field is required!
+              </span>
+              <span *ngIf="courseForm.get('description').errors.minlength">
+                The min length should be 3!
+              </span>
+            </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="offset-2 col-8">
+        <div class="form-group">
+          <label for="image">Picture</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            name="image"
+            formControlName="image">
+            <div class="error" *ngIf="!courseForm.get('image').valid">
+              <span class="text-danger">
+                This field is required!
+              </span>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="offset-2 col-8 text-right">
+        <button 
+          type="submit" 
+          class="btn btn-primary"
+          [disabled]="!courseForm.valid">
+          Save Course
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
