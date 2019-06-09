@@ -1,4 +1,7 @@
-<div class="course-item" style="min-height: 80vh; position: relative;">
+<div class="course-item bg-light p-3">
+  <div class="col-sm">
+    <span>{{ course.title }}</span>
+  </div>
   <div *ngIf="isAdmin">
     <span class="edit-btn" (click)="onCourseEdit()">
       E
@@ -16,7 +19,6 @@
     <img class="course-img" src="{{ course.image }}" alt="CoursePic">
   </div>
   <div class="info-holder">
-    <span>Title: </span><span>{{ course.title }}</span>
     <br>
     <div style="margin-bottom: 60px">
       <span>Description: {{ course.description }}</span>

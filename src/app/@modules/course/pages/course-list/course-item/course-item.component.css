@@ -1,6 +1,8 @@
 .course-item {
     border: 1px solid gray;
     text-align: center;
+    min-height: 85vh;
+    position: relative;
 }
 
 .delete-btn {
