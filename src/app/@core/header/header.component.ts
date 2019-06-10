@@ -25,6 +25,11 @@ export class HeaderComponent implements OnInit, DoCheck {
           this.isAdmin = this.user.role === UserRole.Admin;
         });
     }
+
+    if (!sessionStorage.getItem('loggedUserId')) {
+      this.user = null;
+      this.isAdmin = false;
+    }
   }
 
   logout() {

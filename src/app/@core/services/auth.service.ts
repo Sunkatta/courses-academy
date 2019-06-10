@@ -15,7 +15,16 @@ export class AuthService {
         if (+sessionStorage.getItem('loggedUserId') === 0) {
             this.router.navigateByUrl('courses');
         } else {
-            return this.userService.getById(+sessionStorage.getItem('loggedUserId'));
+            return new Observable<User>((observer) => {
+                this.userService.getById(+sessionStorage.getItem('loggedUserId'))
+                    .subscribe((response: User) => {
+                        observer.next(response);
+                        observer.complete();
+                    },
+                    () => {
+                        this.logout();
+                    });
+            });
         }
     }
 
