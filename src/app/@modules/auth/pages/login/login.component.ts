@@ -25,11 +25,6 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    this.authService.login(this.loginForm.value.email, this.loginForm.value.password)
-      .subscribe(() => {
-        this.router.navigateByUrl('/courses');
-      }, (error) => {
-        this.failedLoginMsg = error;
-      });
+    this.authService.login();
   }
 }

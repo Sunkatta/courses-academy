@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'src/app/@core/services/course.service';
 import { Course } from '../../models/course.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/@core/services/auth.service';
+import { UserManager } from 'oidc-client';
 
 @Component({
   selector: 'app-course-list',
@@ -11,17 +13,19 @@ import { Router } from '@angular/router';
 export class CourseListComponent implements OnInit {
   courses: Course[] = [];
   isAdmin = false;
+  error: boolean;
 
-  constructor(private courseService: CourseService, private router: Router) { }
+  constructor(
+    private courseService: CourseService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthService
+  ) { }
 
-  ngOnInit() {
-    this.isAdmin = sessionStorage.getItem('loggedUserId') ? true : false;
-
-    this.courseService.getAllCourses().subscribe(
-      (response) => {
-        this.courses = response;
-      }
-    );
+  async ngOnInit() {
+    if (this.route.snapshot.queryParams.code !== undefined) {
+      await this.authService.completeAuthentication();
+    }
   }
 
   onAddCourse(): void {
