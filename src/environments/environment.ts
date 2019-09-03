@@ -4,7 +4,12 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/'
+  envName: 'local',
+  appUrl: '',
+  apiUrl: '',
+  ids4Url: '',
+
+  caSecret: ''
 };
 
 /*
