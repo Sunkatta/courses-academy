@@ -14,17 +14,21 @@ export class AdminGuard {
     constructor(private authService: AuthService, private router: Router) {}
 
     canActivateChild(route: Route, segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-        return new Observable<boolean>((observer) => {
-            this.authService.getLoggedUser()
-                .subscribe((response: User) => {
-                    this.user = response;
-                    if (this.user.role !== UserRole.Admin) {
-                        this.router.navigateByUrl('courses');
+        return new Observable<boolean>(
+            (observer) => {
+                this.authService.getLoggedUser()
+                .subscribe(
+                    (response: any) => {
+                        this.user = response;
+                        if (this.user.role !== UserRole.Admin) {
+                            this.router.navigateByUrl('courses');
+                        }
+                        observer.next(true);
+                        observer.complete();
                     }
-                    observer.next(true);
-                    observer.complete();
-                });
-        });
+                );
+            }
+        );
     }
 
     canActivate(route: Route, segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
