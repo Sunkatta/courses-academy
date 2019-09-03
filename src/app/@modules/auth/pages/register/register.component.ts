@@ -20,27 +20,33 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-        id: [null],
+        // id: [null],
         name: [null, [Validators.required, Validators.minLength(3)]],
         email: [null, [Validators.required, Validators.email]],
         password: [null, [Validators.required, Validators.minLength(5)]],
-        role: [UserRole.User],
-        isBlocked: [false]
+        // role: [UserRole.User],
+        // isBlocked: [false]
     });
   }
 
   onRegister(): void {
-    this.userService.getAllUsers()
-      .subscribe((users: User[]) => {
-        const email = this.registerForm.value.email.toLowerCase();
-        if (users.find(u => u.email.toLowerCase() === email)) {
-          this.failedRegisterMsg = 'Email already taken!';
-          return;
-        }
-        this.userService.addNewUser(this.registerForm.value)
-          .subscribe(() => {
-            this.router.navigateByUrl('login');
-        });
-      });
+    const name = this.registerForm.controls.name.value.split(' ');
+    const firstName = name[0].trim();
+    const lastName = name[1].trim();
+
+    this.userService.addNewUser({
+      FirstName: firstName,
+      LastName: lastName,
+      Email: this.registerForm.controls.email.value,
+      Password: this.registerForm.controls.password.value
+    })
+    .subscribe(
+      () => {
+        this.router.navigateByUrl('login');
+      },
+      () => {
+        console.log('FAIL');
+      }
+    );
   }
 }

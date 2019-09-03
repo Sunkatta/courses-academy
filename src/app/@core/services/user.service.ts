@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/@shared/models/user/user.model';
 import { environment } from 'src/environments/environment';
+import { BackendService } from './backend.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private backendService: BackendService) { }
 
     getAllUsers(): Observable<User[]> {
         return this.http.get<User[]>(environment.apiUrl + 'users');
@@ -19,11 +20,8 @@ export class UserService {
         return this.http.delete(environment.apiUrl + 'users/' + id);
     }
 
-    addNewUser(user: User): Observable<any> {
-        if (user.id) {
-            return this.http.put(`${environment.apiUrl}users/${user.id}`, user);
-        }
-        return this.http.post(environment.apiUrl + 'users', user);
+    addNewUser(user: any): Observable<any> {
+        return this.backendService.backendRequest('post', 'Account/Register', user, false);
     }
 
     getById(id: number): Observable<User> {
