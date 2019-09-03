@@ -13,12 +13,12 @@
         <a class="nav-link" routerLink="/users">Users<span class="sr-only">(current)</span></a>
       </li>
     </ul>
-    <div *ngIf="user; else authenticate">
-      Hello, {{ user.email }}
+    <div *ngIf="isAuthenticated; else authenticate">
+      Hello, {{ name }}
       <button (click)="logout()" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
     </div>
     <ng-template #authenticate>
-      <button routerLink="/login" class="btn btn-outline-success my-2 my-sm-0">Login</button>
+      <button (click)="login()" class="btn btn-outline-success my-2 my-sm-0">Login</button>
       <button routerLink="/register" class="btn btn-outline-success my-2 my-sm-0">Register</button>
     </ng-template>
   </div>
