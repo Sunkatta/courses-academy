@@ -1,4 +1,7 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://my-json-server.typicode.com/sunkatta/courses-academy/'
+  envName: 'prod',
+  apiUrl: 'https://courses-academy-api.azurewebsites.net/api/',
+  appUrl: 'https://courses-academy-cf962.firebaseapp.com',
+  ids4Url: 'https://my-ids4.azurewebsites.net',
 };
