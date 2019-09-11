@@ -28,13 +28,13 @@ export class CourseItemComponent implements OnInit {
   ngOnInit() {
     this.isLogged = sessionStorage.getItem('loggedUserId') ? true : false;
 
-    if (this.isLogged) {
-      this.userService.getById(+sessionStorage.getItem('loggedUserId'))
-        .subscribe((response: User) => {
-          this.user = response;
-          this.isAdmin = this.user.role === UserRole.Admin;
-        });
-    }
+    // if (this.isLogged) {
+    //   this.userService.getById(+sessionStorage.getItem('loggedUserId'))
+    //     .subscribe((response: User) => {
+    //       this.user = response;
+    //       this.isAdmin = this.user.role === UserRole.Admin;
+    //     });
+    // }
   }
 
   ratingComponentClick(clickObj: any): void {

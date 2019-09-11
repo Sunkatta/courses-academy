@@ -18,14 +18,14 @@ export class UserItemComponent implements OnInit {
   }
 
   blockUser(id: number): void {
-    this.userService.getById(id)
-      .subscribe((response: User) => {
-        this.user.isBlocked = !response.isBlocked;
+    // this.userService.getById(id)
+    //   .subscribe((response: User) => {
+    //     this.user.isBlocked = !response.isBlocked;
 
-        this.blockBtnText = this.user.isBlocked ? 'Unblock' : 'Block';
+    //     this.blockBtnText = this.user.isBlocked ? 'Unblock' : 'Block';
 
-        this.userService.addNewUser(this.user)
-          .subscribe();
-      });
+    //     this.userService.addNewUser(this.user)
+    //       .subscribe();
+    //   });
   }
 }
