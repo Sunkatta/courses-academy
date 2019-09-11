@@ -3,7 +3,6 @@ import { CourseService } from 'src/app/@core/services/course.service';
 import { Course } from '../../models/course.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/@core/services/auth.service';
-import { UserManager } from 'oidc-client';
 
 @Component({
   selector: 'app-course-list',
@@ -26,6 +25,15 @@ export class CourseListComponent implements OnInit {
     if (this.route.snapshot.queryParams.code !== undefined) {
       await this.authService.completeAuthentication();
     }
+
+    this.courseService.getAllCourses()
+    .subscribe(
+      response => {
+        response.body.forEach(course => {
+          this.courses.push(course);
+        });
+      }
+    );
   }
 
   onAddCourse(): void {
