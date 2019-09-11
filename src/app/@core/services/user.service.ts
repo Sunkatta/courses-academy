@@ -24,7 +24,7 @@ export class UserService {
         return this.backendService.backendRequest('post', 'Account/Register', user, false);
     }
 
-    getById(id: number): Observable<User> {
-        return this.http.get<User>(`${environment.apiUrl}users/${id}`);
+    getById(id: string): Observable<any> {
+        return this.backendService.backendRequest('get', 'Users/' + id, null, true);
     }
 }

@@ -3,16 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Course } from 'src/app/@modules/course/models/course.model';
 import { environment } from '../../../environments/environment';
+import { BackendService } from './backend.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CourseService {
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private backendService: BackendService) {}
 
-    getAllCourses(): Observable<Course[]> {
-      return this.http.get<Course[]>(environment.apiUrl + 'courses');
+    getAllCourses(): Observable<any> {
+      return this.backendService.backendRequest('get', 'Courses', null, false);
     }
 
     getCourseById(id: string): Observable<Course> {
