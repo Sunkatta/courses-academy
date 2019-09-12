@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/@shared/models/user/user.model';
 import { Student } from '../../../models/student.model';
 import { UserRole } from 'src/app/@shared/enums/user-role.enum';
+import { AuthService } from 'src/app/@core/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-item',
@@ -18,15 +20,17 @@ export class CourseItemComponent implements OnInit {
 
   ratingClicked: number;
   user: User;
-  isLogged = false;
+  isAuthenticated = false;
   isAdmin = false;
+  subscription: Subscription;
 
   constructor(private courseService: CourseService,
-              private userService: UserService,
+              private authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
-    this.isLogged = sessionStorage.getItem('loggedUserId') ? true : false;
+    this.subscription = this.authService.authNavStatus$.subscribe(status => this.isAuthenticated = status);
+    // this.isAuthenticated = sessionStorage.getItem('loggedUserId') ? true : false;
 
     // if (this.isLogged) {
     //   this.userService.getById(+sessionStorage.getItem('loggedUserId'))

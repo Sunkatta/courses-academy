@@ -1,8 +1,21 @@
+hr {
+    width: 80%;
+}
+
 .course-item {
     border: 1px solid gray;
     text-align: center;
-    min-height: 85vh;
+    min-height: 55vh;
     position: relative;
+    width: 219px;
+    box-shadow: 8px 8px 5px #bdbdbd;
+}
+
+.course-img {
+    object-fit: contain;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    /* width: 100%;
+    height: auto; */
 }
 
 .delete-btn {
