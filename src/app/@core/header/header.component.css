@@ -1,4 +1,25 @@
 .navbar {
-    background: lightgray;
+    background: rgb(20, 20, 20);
+    color: white;
     border-bottom: 1px solid gray;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
+.navbar a {
+    color: white;
+}
+
+.navbar a:hover {
+    color: rgb(212, 212, 212);
+}
+
+.btn-outline-success {
+    color: white;
+    border-color: white;
+}
+
+.btn-outline-success:hover {
+    background: rgb(150, 150, 150);
 }
