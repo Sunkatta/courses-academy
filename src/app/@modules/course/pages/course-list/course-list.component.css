@@ -1,6 +1,10 @@
+.courses-holder {
+  padding: 0;
+}
+
 .parallax {
   /* The image used */
-  background-image: url("../../../../../assets/images/a5edf97677b5d0be0a7375a6c064ec63.jpg");
+  background-image: url("../../../../../assets/images/abstract_outer_space_thinking_spiral_cosmo_indubitably_deep.jpg");
 
   /* Set a specific height */
   min-height: 100vh; 
@@ -10,4 +14,9 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.text-center {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 5.5rem;
 }

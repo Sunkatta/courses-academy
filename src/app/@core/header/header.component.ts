@@ -4,11 +4,30 @@ import { User } from 'src/app/@shared/models/user/user.model';
 import { UserRole } from 'src/app/@shared/enums/user-role.enum';
 import { Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  animations: [
+    trigger('collapse', [
+      state('open', style({
+        opacity: '1',
+        display: 'block',
+      })),
+      state('closed', style({
+        opacity: '0',
+        display: 'none',
+      })),
+      transition('closed => open', [
+        style({transform: 'translateY(-100%)'}),
+        animate(1000)]),
+      transition('open => closed', [
+        animate(1000, style({transform: 'translateY(-100%)'}))
+      ])
+    ])
+  ]
 })
 export class HeaderComponent implements OnInit, DoCheck {
   isUserLogged = false;
@@ -18,6 +37,8 @@ export class HeaderComponent implements OnInit, DoCheck {
   name = '';
   isAuthenticated: boolean;
   subscription: Subscription;
+  navbarOpen = false;
+  collapse = 'closed';
 
   constructor(private authService: AuthService, private userService: UserService) { }
 
@@ -65,5 +86,10 @@ export class HeaderComponent implements OnInit, DoCheck {
     this.authService.signout();
     this.user = null;
     this.isAdmin = false;
+  }
+
+  toggleNavbar() {
+    // this.navbarOpen = !this.navbarOpen;
+    this.collapse = this.collapse === 'open' ? 'closed' : 'open';
   }
 }
