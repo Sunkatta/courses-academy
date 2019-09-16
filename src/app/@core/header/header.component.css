@@ -30,3 +30,33 @@
 .custom-toggler .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
+
+.collapse.expand {
+    display: block;
+    transition: scale(1.25);
+}
+
+@media only screen and (min-width: 1000px) {
+    .navbar-collapse {
+        display: block;
+        opacity: 1 !important;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .navbar-collapse {
+        margin-top: 2%;
+    }
+
+    .navbar ul {
+        float: left;
+        margin-right: 0;
+        width: 40%;
+    }
+
+    .navbar ul {
+        content: "";
+        clear: both;
+        display: table;
+    }
+}

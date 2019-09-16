@@ -14,18 +14,13 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     trigger('collapse', [
       state('open', style({
         opacity: '1',
-        display: 'block',
       })),
       state('closed', style({
         opacity: '0',
-        display: 'none',
+        height: '0'
       })),
-      transition('closed => open', [
-        style({transform: 'translateY(-100%)'}),
-        animate(1000)]),
-      transition('open => closed', [
-        animate(1000, style({transform: 'translateY(-100%)'}))
-      ])
+      transition('closed => open', animate(200)),
+      transition('open => closed', animate(200))
     ])
   ]
 })
@@ -39,6 +34,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   subscription: Subscription;
   navbarOpen = false;
   collapse = 'closed';
+  navbarExpanded = 'closed';
 
   constructor(private authService: AuthService, private userService: UserService) { }
 
@@ -91,5 +87,6 @@ export class HeaderComponent implements OnInit, DoCheck {
   toggleNavbar() {
     // this.navbarOpen = !this.navbarOpen;
     this.collapse = this.collapse === 'open' ? 'closed' : 'open';
+    this.navbarExpanded = this.collapse;
   }
 }
