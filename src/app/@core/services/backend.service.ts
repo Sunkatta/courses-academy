@@ -20,7 +20,7 @@ export class BackendService {
             return this.http.post(
                 environment.apiUrl + requestTarget,
                 requestData,
-                // { headers: this.getContentHeaders(useUserToken) }
+                { headers: this.getContentHeaders(useUserToken) }
             );
         } else if (requestType === 'get') {
             return this.http.get(
