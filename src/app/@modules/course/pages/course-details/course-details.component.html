@@ -1,0 +1,51 @@
+<div class="row course-overview bg-light p-4 mb-2">
+    <div class="col-md-3">
+        <img src="{{ course?.image }}" alt="{{ course?.title }}">
+    </div>
+    <div class="col-md-9">
+        <h1>{{ course?.title }}</h1>
+        <hr>
+        <h5>{{ course?.description }}</h5>
+        <hr>
+        <div *ngIf="course?.students.length !== 0; else greet">
+            <span><b>{{ course?.students.length }} students are already enrolled!</b></span>
+        </div>
+        <ng-template #greet>
+            <div>
+                <span><b>Be the first one to enroll in this course!</b></span>
+            </div>
+        </ng-template>
+    </div>
+</div>
+<div class="row">
+    <div *ngIf="isAuthenticated; else generalInfo" class="col-md-12 mb-3">
+        <!-- <app-rating 
+            style="text-align: left"
+            [rating]='course.rating' 
+            [itemId]='course.id' 
+            (ratingClick)='ratingComponentClick($event)'>
+        </app-rating> -->
+        <div class="row" *ngIf="canAssign; else alreadyJoined">
+            <button 
+                class="justify-content-end ml-5 btn btn-primary" 
+                (click)="onJoinCourse()">
+                Join Course
+            </button>
+        </div>
+        <ng-template #alreadyJoined>
+            <div class="row">
+                <button class="justify-content-end ml-5 btn btn-primary" disabled>
+                    Already Joined
+                </button>
+            </div>
+        </ng-template>
+    </div>
+    <ng-template #generalInfo>
+        <div class="col-md-12 ml-3">
+            <span>You must be logged in to join a course</span>
+            <button class="justify-content-end btn btn-primary ml-3" (click)="login()">
+                Login
+            </button>
+        </div>
+    </ng-template>
+</div>

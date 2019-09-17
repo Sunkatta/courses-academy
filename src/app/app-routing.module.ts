@@ -8,6 +8,7 @@ import { UserComponent } from './@modules/user/pages/user/user.component';
 import { UserListComponent } from './@modules/user/pages/user-list/user-list.component';
 import { AdminGuard } from './@core/guards/admin.guard';
 import { RegisterComponent } from './@modules/auth/pages/register/register.component';
+import { CourseDetailsComponent } from './@modules/course/pages/course-details/course-details.component';
 
 const routes: Routes = [
     {
@@ -22,6 +23,10 @@ const routes: Routes = [
             {
                 path: '',
                 component: CourseListComponent,
+            },
+            {
+                path: ':id',
+                component: CourseDetailsComponent
             },
             {
                 path: 'add',
