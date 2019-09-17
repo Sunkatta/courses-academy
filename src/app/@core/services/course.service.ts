@@ -16,8 +16,8 @@ export class CourseService {
       return this.backendService.backendRequest('get', 'Courses', null, false);
     }
 
-    getCourseById(id: string): Observable<Course> {
-      return this.http.get<Course>(`${environment.apiUrl}courses/${id}`);
+    getCourseById(id: string): Observable<any> {
+      return this.backendService.backendRequest('get', 'Courses/' + id, null, false);
     }
 
     addNewCourse(course: Course): Observable<any> {
@@ -31,7 +31,7 @@ export class CourseService {
       return this.http.delete(environment.apiUrl + 'courses/' + id);
     }
 
-    joinCourse(course: Course): Observable<any> {
-      return this.http.put(`${environment.apiUrl}courses/${course.id}`, course);
+    joinCourse(data: any): Observable<any> {
+      return this.backendService.backendRequest('post', 'Courses/JoinCourse', data, false);
     }
 }
