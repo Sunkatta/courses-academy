@@ -1,4 +1,4 @@
-<div class="course-item bg-light">
+<div class="course-item bg-light" (click)="onCourseSelected(course.id)">
   <div *ngIf="isAdmin">
     <span class="edit-btn" (click)="onCourseEdit()">
       E
@@ -18,36 +18,5 @@
   <hr>
   <div class="col-sm">
     <h5>{{ course.title }}</h5>
-  </div>
-  <div class="info-holder">
-    <br>
-    <!-- <div style="margin-bottom: 60px">
-      <span>Description: {{ course.description }}</span>
-    </div> -->
-    <!-- <div *ngIf="isAuthenticated" class="mb-3" style="position: absolute; bottom: 0">
-      <div>
-        <span>Total Students: {{ course.students.length }}</span>
-      </div>
-      <app-rating 
-        style="text-align: left"
-        [rating]='course.rating' 
-        [itemId]='course.id' 
-        (ratingClick)='ratingComponentClick($event)'>
-      </app-rating>
-      <div class="row" *ngIf="canAssign; else alreadyJoined">
-        <button 
-          class="justify-content-end ml-5 btn btn-primary" 
-          (click)="onJoinCourse()">
-          Join Course
-        </button>
-      </div>
-      <ng-template #alreadyJoined>
-        <div class="row">
-          <button class="justify-content-end ml-5 btn btn-primary" disabled>
-            Already Joined
-          </button>
-        </div>
-      </ng-template>
-    </div> -->
   </div>
 </div>

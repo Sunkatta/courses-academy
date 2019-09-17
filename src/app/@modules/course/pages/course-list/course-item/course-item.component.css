@@ -9,6 +9,13 @@ hr {
     position: relative;
     width: 219px;
     box-shadow: 8px 8px 5px #bdbdbd;
+    transition: 0.2s;
+}
+
+.course-item:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 5px #a0a0a0;
+    transition: 0.2s;
 }
 
 .course-img {

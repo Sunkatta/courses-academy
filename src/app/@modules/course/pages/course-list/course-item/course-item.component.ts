@@ -19,17 +19,12 @@ export class CourseItemComponent implements OnInit {
   @Output() delete = new EventEmitter<string>();
 
   ratingClicked: number;
-  user: User;
-  isAuthenticated = false;
   isAdmin = false;
-  subscription: Subscription;
 
   constructor(private courseService: CourseService,
-              private authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
-    this.subscription = this.authService.authNavStatus$.subscribe(status => this.isAuthenticated = status);
     // this.isAuthenticated = sessionStorage.getItem('loggedUserId') ? true : false;
 
     // if (this.isLogged) {
@@ -67,32 +62,7 @@ export class CourseItemComponent implements OnInit {
     this.router.navigate(['courses/edit', this.course.id]);
   }
 
-  onJoinCourse() {
-    const userId = this.user.id;
-    if (this.course.students.findIndex(u => u.id === userId) !== -1) {
-      return;
-    }
-
-    const student: Student = {
-      name: this.user.name,
-      id: userId
-    };
-
-    this.course.students.push(student);
-
-    this.courseService.joinCourse(this.course)
-      .subscribe(() => {
-        console.log('SUCCESS!!!');
-      });
-  }
-
-  get canAssign(): boolean {
-    if (!this.user) {
-      return false;
-    }
-
-    const userId = this.user.id;
-
-    return this.course.students.findIndex(u => u.id === userId) === -1;
+  onCourseSelected(id: string) {
+    this.router.navigateByUrl('courses/' + id);
   }
 }
