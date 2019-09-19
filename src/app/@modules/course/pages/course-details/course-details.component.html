@@ -72,12 +72,6 @@
 </div>
 <div class="row">
     <div *ngIf="isAuthenticated; else generalInfo" class="col-md-12 mb-3">
-        <app-rating 
-            style="text-align: left"
-            [rating]='course?.rating'
-            [itemId]='course?.id' 
-            (ratingClick)='ratingComponentClick($event)'>
-        </app-rating>
         <div class="row" *ngIf="canAssign; else alreadyJoined">
             <button 
                 class="justify-content-end ml-5 btn btn-primary" 
@@ -86,10 +80,24 @@
             </button>
         </div>
         <ng-template #alreadyJoined>
-            <div class="row">
-                <button class="justify-content-end ml-5 btn btn-primary" disabled>
-                    Already Joined
-                </button>
+            <div class="row mr-3 ml-1 mt-4">
+                <div class="col-md-3">
+                    <button class="justify-content-end ml-5 btn btn-primary" disabled>
+                        Already Joined
+                    </button>
+                </div>
+                <div class="col-md-9 rating-box text-center">
+                    <h5 class="mt-2">
+                        Enjoying the course? Or perhaps not? Let others know of your experience!
+                    </h5>
+                    <p>(Don't sweat it - you can change your rating anytime again)</p>
+                    <div class="ml-5">
+                        <app-rating
+                            [itemId]='course?.id' 
+                            (ratingClick)='ratingComponentClick($event)'>
+                        </app-rating>
+                    </div>
+                </div>
             </div>
         </ng-template>
     </div>

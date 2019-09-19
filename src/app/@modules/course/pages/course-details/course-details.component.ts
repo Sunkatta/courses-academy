@@ -60,20 +60,22 @@ export class CourseDetailsComponent implements OnInit {
 
     ratingComponentClick(clickObj: any): void {
         this.courseService.getAllCourses()
-        .subscribe((allCourses: Course[]) => {
-            const course = allCourses.find(c => c.id === clickObj.itemId);
-            console.log(allCourses);
-            if (!!course) {
-            course.rating = clickObj.rating;
-            this.ratingClicked = clickObj.rating;
-            this.courseService.addNewCourse(course)
-                .subscribe(
-                () => {
-                    console.log('Course Updated!');
+        .subscribe(
+            (response) => {
+                const course = response.body.find(c => c.id === clickObj.itemId);
+                console.log(course);
+                if (!!course) {
+                    course.rating = clickObj.rating;
+                    this.ratingClicked = clickObj.rating;
+                    this.courseService.addNewCourse(course)
+                    .subscribe(
+                        () => {
+                            console.log('Course Updated!');
+                        }
+                    );
                 }
-                );
             }
-        });
+        );
     }
 
     onJoinCourse() {
@@ -100,7 +102,6 @@ export class CourseDetailsComponent implements OnInit {
     }
 
     calculateWidth(courseRating: number): number {
-        console.log((courseRating - Math.floor(courseRating)) * 100);
         return (courseRating - Math.floor(courseRating)) * 100;
     }
 }

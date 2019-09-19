@@ -25,3 +25,9 @@
     color: gold;
     position: absolute;
 }
+
+.rating-box {
+    border: 1px solid gray;
+    background: #f8f9fa;
+    box-shadow: 6px 6px 4px #bdbdbd;
+}
