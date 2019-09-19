@@ -18,7 +18,7 @@
     cursor:pointer;
     font-size:200%;
     line-height:1.2;
-    color:#ddd;
+    color:rgb(160, 160, 160);
 }
 
 .rating:not(:checked) > label:before {
@@ -39,4 +39,8 @@
 .rating > input:checked ~ label:hover ~ label,
 .rating > label:hover ~ input:checked ~ label {
     color: #ea0;
+}
+
+.btn.btn-primary {
+    float: left;
 }
