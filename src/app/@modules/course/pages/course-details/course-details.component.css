@@ -5,3 +5,23 @@
 .course-overview img {
     border: 1px solid gray;
 }
+
+.rating div {
+    position: relative;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.checked {
+    color: gold;
+}
+
+.fa-star {
+    font-size: 1.3rem;
+    overflow: hidden;
+}
+
+.special-star {
+    color: gold;
+    position: absolute;
+}

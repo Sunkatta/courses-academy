@@ -19,6 +19,7 @@ export class CourseDetailsComponent implements OnInit {
     canAssign: boolean;
     isAuthenticated = false;
     user: User;
+    ratingClicked: number;
 
     constructor(private route: ActivatedRoute,
                 private courseService: CourseService,
@@ -57,6 +58,24 @@ export class CourseDetailsComponent implements OnInit {
         this.authService.login();
     }
 
+    ratingComponentClick(clickObj: any): void {
+        this.courseService.getAllCourses()
+        .subscribe((allCourses: Course[]) => {
+            const course = allCourses.find(c => c.id === clickObj.itemId);
+            console.log(allCourses);
+            if (!!course) {
+            course.rating = clickObj.rating;
+            this.ratingClicked = clickObj.rating;
+            this.courseService.addNewCourse(course)
+                .subscribe(
+                () => {
+                    console.log('Course Updated!');
+                }
+                );
+            }
+        });
+    }
+
     onJoinCourse() {
         const userId = this.authService.name;
         if (Object.values(this.course.students).find(u => u === this.user.id) !== undefined) {
@@ -78,5 +97,10 @@ export class CourseDetailsComponent implements OnInit {
                 this.canAssign = false;
             }
         );
+    }
+
+    calculateWidth(courseRating: number): number {
+        console.log((courseRating - Math.floor(courseRating)) * 100);
+        return (courseRating - Math.floor(courseRating)) * 100;
     }
 }

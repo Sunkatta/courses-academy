@@ -7,24 +7,77 @@
         <hr>
         <h5>{{ course?.description }}</h5>
         <hr>
-        <div *ngIf="course?.students.length !== 0; else greet">
-            <span><b>{{ course?.students.length }} students are already enrolled!</b></span>
-        </div>
-        <ng-template #greet>
-            <div>
-                <span><b>Be the first one to enroll in this course!</b></span>
+        <div class="row">
+            <div class="col-md-4" *ngIf="course?.students.length !== 0; else greet">
+                <span><b>{{ course?.students.length }} students are already enrolled!</b></span>
             </div>
-        </ng-template>
+            <ng-template #greet>
+                <div class="col-md-4">
+                    <span><b>Be the first one to join this course!</b></span>
+                </div>
+            </ng-template>
+            <div class="col-md-8 rating">
+                <div>
+                    <span 
+                        class="fa fa-star special-star"
+                        *ngIf="course?.rating < 1"
+                        [ngClass]="{checked: course?.rating > 1}" 
+                        [ngStyle]="{'width.%': calculateWidth(course?.rating)}">
+                    </span>
+                    <span class="fa fa-star" [ngClass]="{checked: course?.rating >= 1}"></span>
+                </div>
+                <div>
+                    <span 
+                        class="fa fa-star special-star"
+                        *ngIf="course?.rating < 2 && course?.rating > 1"
+                        [ngClass]="{checked: course?.rating > 1}" 
+                        [ngStyle]="{'width.%': calculateWidth(course?.rating)}">
+                    </span>
+                    <span class="fa fa-star" [ngClass]="{checked: course?.rating >= 2}"></span>
+                </div>
+                <div>
+                    <span 
+                        class="fa fa-star special-star"
+                        *ngIf="course?.rating < 3 && course?.rating > 2"
+                        [ngClass]="{checked: course?.rating > 2}" 
+                        [ngStyle]="{'width.%': calculateWidth(course?.rating)}">
+                    </span>
+                    <span class="fa fa-star" [ngClass]="{checked: course?.rating >= 3}"></span>
+                </div>
+                <div>
+                    <span 
+                        class="fa fa-star special-star"
+                        *ngIf="course?.rating < 4 && course?.rating > 3"
+                        [ngClass]="{checked: course?.rating > 3}" 
+                        [ngStyle]="{'width.%': calculateWidth(course?.rating)}">
+                    </span>
+                    <span class="fa fa-star" [ngClass]="{checked: course?.rating >= 4}"></span>
+                </div>
+                <div>
+                    <span 
+                        class="fa fa-star special-star"
+                        *ngIf="course?.rating < 5 && course?.rating > 4"
+                        [ngClass]="{checked: course?.rating > 4}" 
+                        [ngStyle]="{'width.%': calculateWidth(course?.rating)}">
+                    </span>
+                    <span class="fa fa-star" [ngClass]="{checked: course?.rating >= 5}"></span>
+                </div>
+                <span class="ml-3" *ngIf="course?.rating !== 0; else noVote"><b>{{ course?.rating }} stars out of 5</b></span>
+                <ng-template #noVote>
+                    <span class="ml-3"><b>Be the first one to rate this course!</b></span>
+                </ng-template>
+            </div>           
+        </div>
     </div>
 </div>
 <div class="row">
     <div *ngIf="isAuthenticated; else generalInfo" class="col-md-12 mb-3">
-        <!-- <app-rating 
+        <app-rating 
             style="text-align: left"
-            [rating]='course.rating' 
-            [itemId]='course.id' 
+            [rating]='course?.rating'
+            [itemId]='course?.id' 
             (ratingClick)='ratingComponentClick($event)'>
-        </app-rating> -->
+        </app-rating>
         <div class="row" *ngIf="canAssign; else alreadyJoined">
             <button 
                 class="justify-content-end ml-5 btn btn-primary" 
