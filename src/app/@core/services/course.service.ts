@@ -31,6 +31,10 @@ export class CourseService {
       return this.http.delete(environment.apiUrl + 'courses/' + id);
     }
 
+    updateCourse(data: any): Observable<any> {
+      return this.backendService.backendRequest('post', 'Courses/UpdateCourse', data);
+    }
+
     joinCourse(data: any): Observable<any> {
       return this.backendService.backendRequest('post', 'Courses/JoinCourse', data, false);
     }
