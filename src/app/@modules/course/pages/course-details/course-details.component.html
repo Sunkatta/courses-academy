@@ -8,8 +8,8 @@
         <h5>{{ course?.description }}</h5>
         <hr>
         <div class="row">
-            <div class="col-md-4" *ngIf="course?.students.length !== 0; else greet">
-                <span><b>{{ course?.students.length }} students are already enrolled!</b></span>
+            <div class="col-md-4" *ngIf="course?.studentsCount !== 0; else greet">
+                <span><b>{{ course?.studentsCount }} students are already enrolled!</b></span>
             </div>
             <ng-template #greet>
                 <div class="col-md-4">
@@ -62,7 +62,9 @@
                     </span>
                     <span class="fa fa-star" [ngClass]="{checked: course?.rating >= 5}"></span>
                 </div>
-                <span class="ml-3" *ngIf="course?.rating !== 0; else noVote"><b>{{ course?.rating }} stars out of 5</b></span>
+                <span class="ml-3" *ngIf="course?.rating !== 0; else noVote">
+                    <b>{{ course?.rating }} stars out of 5 ({{ course?.voters }} votes)</b>
+                </span>
                 <ng-template #noVote>
                     <span class="ml-3"><b>Be the first one to rate this course!</b></span>
                 </ng-template>
@@ -93,6 +95,7 @@
                     <p>(Don't sweat it - you can change your rating anytime again)</p>
                     <div class="ml-5">
                         <app-rating
+                            [rating]='student?.personalRating'
                             [itemId]='course?.id' 
                             (ratingClick)='ratingComponentClick($event)'>
                         </app-rating>

@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class RatingComponent implements OnInit {
   ratingForm: FormGroup;
-  rating: number;
+  @Input() rating: number;
   @Input() itemId: number;
   @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
 

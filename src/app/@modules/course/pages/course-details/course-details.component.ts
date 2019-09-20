@@ -19,7 +19,7 @@ export class CourseDetailsComponent implements OnInit {
     canAssign: boolean;
     isAuthenticated = false;
     user: User;
-    ratingClicked: number;
+    student: Student;
 
     constructor(private route: ActivatedRoute,
                 private courseService: CourseService,
@@ -28,24 +28,12 @@ export class CourseDetailsComponent implements OnInit {
 
     ngOnInit() {
         this.subscription = this.authService.authNavStatus$.subscribe(status => this.isAuthenticated = status);
-        const id = this.route.snapshot.params.id;
+        const courseId = this.route.snapshot.params.id;
 
-        // if user is logged, fork join getting the course and the user.
         if (this.authService.user) {
-            const courseObservable = this.courseService.getCourseById(id);
-            const userObservable = this.userService.getById(this.authService.name);
-
-            forkJoin([courseObservable, userObservable])
-            .subscribe(
-                results => {
-                    this.course = results[0].body;
-                    this.user = results[1].body;
-                    Object.values(this.course.students).find(u => u === this.user.id) !== undefined ?
-                        this.canAssign = false : this.canAssign = true;
-                }
-            );
+            this.GetCourseAndUser(courseId);
         } else {
-            this.courseService.getCourseById(id)
+            this.courseService.getCourseById(courseId)
             .subscribe(
                 response => {
                     this.course = response.body;
@@ -59,36 +47,24 @@ export class CourseDetailsComponent implements OnInit {
     }
 
     ratingComponentClick(clickObj: any): void {
-        this.courseService.getAllCourses()
+        this.courseService.rateCourse({
+            CourseId: this.course.id,
+            UserId: this.user.id,
+            PersonalRating: clickObj.rating
+        })
         .subscribe(
-            (response) => {
-                const course = response.body.find(c => c.id === clickObj.itemId);
-                console.log(course);
-                if (!!course) {
-                    course.rating = clickObj.rating;
-                    this.ratingClicked = clickObj.rating;
-                    this.courseService.addNewCourse(course)
-                    .subscribe(
-                        () => {
-                            console.log('Course Updated!');
-                        }
-                    );
-                }
+            updatedRating => {
+                this.course.rating = updatedRating;
+                this.course.voters++;
             }
         );
     }
 
     onJoinCourse() {
         const userId = this.authService.name;
-        if (Object.values(this.course.students).find(u => u === this.user.id) !== undefined) {
+        if (Object.keys(this.course.students).find(u => u === this.user.id) !== undefined) {
             return;
         }
-
-        const student: Student = {
-            id: userId
-        };
-
-        this.course.students.push(student);
 
         this.courseService.joinCourse({
             UserId: userId,
@@ -97,11 +73,35 @@ export class CourseDetailsComponent implements OnInit {
         .subscribe(
             () => {
                 this.canAssign = false;
+                this.course.studentsCount++;
             }
         );
     }
 
     calculateWidth(courseRating: number): number {
         return (courseRating - Math.floor(courseRating)) * 100;
+    }
+
+    private GetCourseAndUser(courseId: any) {
+        // if user is logged, fork join getting the course and the user.
+        const courseObservable = this.courseService.getCourseById(courseId);
+        const userObservable = this.userService.getById(this.authService.name);
+
+        forkJoin([courseObservable, userObservable])
+        .subscribe(
+            results => {
+                this.course = results[0].body;
+                this.user = results[1].body;
+
+                const studentId = Object.keys(this.course.students).find(u => u === this.user.id);
+                studentId !== undefined ?
+                    this.canAssign = false : this.canAssign = true;
+
+                this.student = {
+                    id: studentId,
+                    personalRating: this.course.students[studentId]
+                };
+            }
+        );
     }
 }
