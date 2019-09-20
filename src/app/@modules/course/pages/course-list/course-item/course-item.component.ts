@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/@shared/models/user/user.model';
 import { Student } from '../../../models/student.model';
 import { UserRole } from 'src/app/@shared/enums/user-role.enum';
+import { AuthService } from 'src/app/@core/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-item',
@@ -17,24 +19,21 @@ export class CourseItemComponent implements OnInit {
   @Output() delete = new EventEmitter<string>();
 
   ratingClicked: number;
-  user: User;
-  isLogged = false;
   isAdmin = false;
 
   constructor(private courseService: CourseService,
-              private userService: UserService,
               private router: Router) { }
 
   ngOnInit() {
-    this.isLogged = sessionStorage.getItem('loggedUserId') ? true : false;
+    // this.isAuthenticated = sessionStorage.getItem('loggedUserId') ? true : false;
 
-    if (this.isLogged) {
-      this.userService.getById(+sessionStorage.getItem('loggedUserId'))
-        .subscribe((response: User) => {
-          this.user = response;
-          this.isAdmin = this.user.role === UserRole.Admin;
-        });
-    }
+    // if (this.isLogged) {
+    //   this.userService.getById(+sessionStorage.getItem('loggedUserId'))
+    //     .subscribe((response: User) => {
+    //       this.user = response;
+    //       this.isAdmin = this.user.role === UserRole.Admin;
+    //     });
+    // }
   }
 
   ratingComponentClick(clickObj: any): void {
@@ -63,32 +62,7 @@ export class CourseItemComponent implements OnInit {
     this.router.navigate(['courses/edit', this.course.id]);
   }
 
-  onJoinCourse() {
-    const userId = this.user.id;
-    if (this.course.students.findIndex(u => u.id === userId) !== -1) {
-      return;
-    }
-
-    const student: Student = {
-      name: this.user.name,
-      id: userId
-    };
-
-    this.course.students.push(student);
-
-    this.courseService.joinCourse(this.course)
-      .subscribe(() => {
-        console.log('SUCCESS!!!');
-      });
-  }
-
-  get canAssign(): boolean {
-    if (!this.user) {
-      return false;
-    }
-
-    const userId = this.user.id;
-
-    return this.course.students.findIndex(u => u.id === userId) === -1;
+  onCourseSelected(id: string) {
+    this.router.navigateByUrl('courses/' + id);
   }
 }

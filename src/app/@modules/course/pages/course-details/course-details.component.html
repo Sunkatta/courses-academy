@@ -1,0 +1,115 @@
+<div class="row course-overview bg-light p-4 mb-2">
+    <div class="col-md-3">
+        <img src="{{ course?.image }}" alt="{{ course?.title }}">
+    </div>
+    <div class="col-md-9">
+        <h1>{{ course?.title }}</h1>
+        <hr>
+        <h5>{{ course?.description }}</h5>
+        <hr>
+        <div class="row">
+            <div class="col-md-4" *ngIf="course?.studentsCount !== 0; else greet">
+                <span><b>{{ course?.studentsCount }} students are already enrolled!</b></span>
+            </div>
+            <ng-template #greet>
+                <div class="col-md-4">
+                    <span><b>Be the first one to join this course!</b></span>
+                </div>
+            </ng-template>
+            <div class="col-md-8 rating">
+                <div>
+                    <span 
+                        class="fa fa-star special-star"
+                        *ngIf="course?.rating < 1"
+                        [ngClass]="{checked: course?.rating > 1}" 
+                        [ngStyle]="{'width.%': calculateWidth(course?.rating)}">
+                    </span>
+                    <span class="fa fa-star" [ngClass]="{checked: course?.rating >= 1}"></span>
+                </div>
+                <div>
+                    <span 
+                        class="fa fa-star special-star"
+                        *ngIf="course?.rating < 2 && course?.rating > 1"
+                        [ngClass]="{checked: course?.rating > 1}" 
+                        [ngStyle]="{'width.%': calculateWidth(course?.rating)}">
+                    </span>
+                    <span class="fa fa-star" [ngClass]="{checked: course?.rating >= 2}"></span>
+                </div>
+                <div>
+                    <span 
+                        class="fa fa-star special-star"
+                        *ngIf="course?.rating < 3 && course?.rating > 2"
+                        [ngClass]="{checked: course?.rating > 2}" 
+                        [ngStyle]="{'width.%': calculateWidth(course?.rating)}">
+                    </span>
+                    <span class="fa fa-star" [ngClass]="{checked: course?.rating >= 3}"></span>
+                </div>
+                <div>
+                    <span 
+                        class="fa fa-star special-star"
+                        *ngIf="course?.rating < 4 && course?.rating > 3"
+                        [ngClass]="{checked: course?.rating > 3}" 
+                        [ngStyle]="{'width.%': calculateWidth(course?.rating)}">
+                    </span>
+                    <span class="fa fa-star" [ngClass]="{checked: course?.rating >= 4}"></span>
+                </div>
+                <div>
+                    <span 
+                        class="fa fa-star special-star"
+                        *ngIf="course?.rating < 5 && course?.rating > 4"
+                        [ngClass]="{checked: course?.rating > 4}" 
+                        [ngStyle]="{'width.%': calculateWidth(course?.rating)}">
+                    </span>
+                    <span class="fa fa-star" [ngClass]="{checked: course?.rating >= 5}"></span>
+                </div>
+                <span class="ml-3" *ngIf="course?.rating !== 0; else noVote">
+                    <b>{{ course?.rating }} stars out of 5 ({{ course?.voters }} votes)</b>
+                </span>
+                <ng-template #noVote>
+                    <span class="ml-3"><b>Be the first one to rate this course!</b></span>
+                </ng-template>
+            </div>           
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div *ngIf="isAuthenticated; else generalInfo" class="col-md-12 mb-3">
+        <div class="row" *ngIf="canAssign; else alreadyJoined">
+            <button 
+                class="justify-content-end ml-5 btn btn-primary" 
+                (click)="onJoinCourse()">
+                Join Course
+            </button>
+        </div>
+        <ng-template #alreadyJoined>
+            <div class="row mr-3 ml-1 mt-4">
+                <div class="col-md-3">
+                    <button class="justify-content-end ml-5 btn btn-primary" disabled>
+                        Already Joined
+                    </button>
+                </div>
+                <div class="col-md-9 rating-box text-center">
+                    <h5 class="mt-2">
+                        Enjoying the course? Or perhaps not? Let others know of your experience!
+                    </h5>
+                    <p>(Don't sweat it - you can change your rating anytime again)</p>
+                    <div class="ml-5">
+                        <app-rating
+                            [rating]='student?.personalRating'
+                            [itemId]='course?.id' 
+                            (ratingClick)='ratingComponentClick($event)'>
+                        </app-rating>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+    <ng-template #generalInfo>
+        <div class="col-md-12 ml-3">
+            <span>You must be logged in to join a course</span>
+            <button class="justify-content-end btn btn-primary ml-3" (click)="login()">
+                Login
+            </button>
+        </div>
+    </ng-template>
+</div>

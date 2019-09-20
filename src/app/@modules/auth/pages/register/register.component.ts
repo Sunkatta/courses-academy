@@ -4,6 +4,7 @@ import { UserService } from 'src/app/@core/services/user.service';
 import { User } from 'src/app/@shared/models/user/user.model';
 import { Router } from '@angular/router';
 import { UserRole } from 'src/app/@shared/enums/user-role.enum';
+import { AuthService } from 'src/app/@core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -32,7 +34,10 @@ export class RegisterComponent implements OnInit {
   onRegister(): void {
     const name = this.registerForm.controls.name.value.split(' ');
     const firstName = name[0].trim();
-    const lastName = name[1].trim();
+    let lastName = null;
+    if (name[1]) {
+      lastName = name[1].trim();
+    }
 
     this.userService.addNewUser({
       FirstName: firstName,
@@ -42,7 +47,7 @@ export class RegisterComponent implements OnInit {
     })
     .subscribe(
       () => {
-        this.router.navigateByUrl('login');
+        this.authService.login();
       },
       () => {
         console.log('FAIL');

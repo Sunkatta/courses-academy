@@ -1,4 +1,10 @@
 <div class="courses-holder col-12">
+  <div class="parallax">
+    <div class="ml-5">
+    </div>
+  </div>
+  <h1 class="text-center mt-5">Courses Academy</h1>
+  <hr style="width: 90%;">
   <div class="row justify-content-end mr-3 mt-2">
     <button 
       *ngIf="isAdmin"
@@ -7,8 +13,8 @@
       Add new course
     </button>
   </div>
-  <div class="row">
-    <div class="course-card col-4 mt-3 mb-3" *ngFor="let course of courses; let index = index">
+  <div class="row ml-4 mr-4">
+    <div class="course-card col-md-2 m-5" *ngFor="let course of courses; let index = index">
       <app-course-item 
         [course]="course"
         (delete)="onCourseDeleted($event)">

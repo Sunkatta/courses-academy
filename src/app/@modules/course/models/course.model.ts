@@ -5,6 +5,8 @@ export class Course {
     title: string;
     description: string;
     rating: number;
-    students: Student[];
+    students: any;
+    studentsCount: number;
+    voters: number;
     image: string;
 }

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './@core/header/header.component';
@@ -16,6 +17,7 @@ import { UserComponent } from './@modules/user/pages/user/user.component';
 import { UserListComponent } from './@modules/user/pages/user-list/user-list.component';
 import { RegisterComponent } from './@modules/auth/pages/register/register.component';
 import { UserItemComponent } from './@modules/user/pages/user-list/user-item/user-item.component';
+import { CourseDetailsComponent } from './@modules/course/pages/course-details/course-details.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { UserItemComponent } from './@modules/user/pages/user-list/user-item/use
     RatingComponent,
     CourseComponent,
     CourseAddComponent,
+    CourseDetailsComponent,
     UserComponent,
     UserListComponent,
     RegisterComponent,
@@ -37,7 +40,8 @@ import { UserItemComponent } from './@modules/user/pages/user-list/user-item/use
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

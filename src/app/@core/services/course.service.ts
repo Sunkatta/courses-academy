@@ -3,34 +3,43 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Course } from 'src/app/@modules/course/models/course.model';
 import { environment } from '../../../environments/environment';
+import { BackendService } from './backend.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CourseService {
 
-    constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private backendService: BackendService) { }
 
-    getAllCourses(): Observable<Course[]> {
-      return this.http.get<Course[]>(environment.apiUrl + 'courses');
-    }
+  getAllCourses(): Observable<any> {
+    return this.backendService.backendRequest('get', 'Courses', null, false);
+  }
 
-    getCourseById(id: string): Observable<Course> {
-      return this.http.get<Course>(`${environment.apiUrl}courses/${id}`);
-    }
+  getCourseById(id: string): Observable<any> {
+    return this.backendService.backendRequest('get', 'Courses/' + id, null, false);
+  }
 
-    addNewCourse(course: Course): Observable<any> {
-      if (course.id) {
-        return this.http.put(`${environment.apiUrl}courses/${course.id}`, course);
-      }
-      return this.http.post(environment.apiUrl + 'courses', course);
-    }
-
-    deleteCourse(id: string): Observable<any> {
-      return this.http.delete(environment.apiUrl + 'courses/' + id);
-    }
-
-    joinCourse(course: Course): Observable<any> {
+  addNewCourse(course: Course): Observable<any> {
+    if (course.id) {
       return this.http.put(`${environment.apiUrl}courses/${course.id}`, course);
     }
+    return this.http.post(environment.apiUrl + 'courses', course);
+  }
+
+  deleteCourse(id: string): Observable<any> {
+    return this.http.delete(environment.apiUrl + 'courses/' + id);
+  }
+
+  updateCourse(data: any): Observable<any> {
+    return this.backendService.backendRequest('post', 'Courses/UpdateCourse', data);
+  }
+
+  joinCourse(data: any): Observable<any> {
+    return this.backendService.backendRequest('post', 'Courses/JoinCourse', data, false);
+  }
+
+  rateCourse(data: any): Observable<any> {
+    return this.backendService.backendRequest('post', 'Courses/RateCourse', data, false);
+  }
 }

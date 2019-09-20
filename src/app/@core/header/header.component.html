@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
   <a class="navbar-brand" routerLink="/courses">Courses Academy</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button (click)="toggleNavbar()" class="navbar-toggler custom-toggler" type="button">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="navbar-collapse" [@collapse]="collapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" routerLink="/courses">Courses<span class="sr-only">(current)</span></a>
@@ -18,7 +18,7 @@
       <button (click)="logout()" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
     </div>
     <ng-template #authenticate>
-      <button (click)="login()" class="btn btn-outline-success my-2 my-sm-0">Login</button>
+      <button (click)="login()" class="btn btn-outline-success my-2 my-sm-0 mr-2">Login</button>
       <button routerLink="/register" class="btn btn-outline-success my-2 my-sm-0">Register</button>
     </ng-template>
   </div>

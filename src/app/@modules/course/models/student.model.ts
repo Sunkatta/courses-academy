@@ -1,4 +1,4 @@
 export class Student {
-    name: string;
-    id: number;
+    id: string;
+    personalRating: number;
 }

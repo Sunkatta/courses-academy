@@ -1,0 +1,22 @@
+.courses-holder {
+  padding: 0;
+}
+
+.parallax {
+  /* The image used */
+  background-image: url("../../../../../assets/images/abstract_outer_space_thinking_spiral_cosmo_indubitably_deep.jpg");
+
+  /* Set a specific height */
+  min-height: 100vh; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.text-center {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 5.5rem;
+}
