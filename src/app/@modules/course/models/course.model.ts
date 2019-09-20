@@ -6,5 +6,7 @@ export class Course {
     description: string;
     rating: number;
     students: any;
+    studentsCount: number;
+    voters: number;
     image: string;
 }
