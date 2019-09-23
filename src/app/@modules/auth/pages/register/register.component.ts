@@ -12,9 +12,10 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   failedRegisterMsg: string;
 
-  constructor(private formBuilder: FormBuilder,
-              private userService: UserService,
-              private authService: AuthService
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
