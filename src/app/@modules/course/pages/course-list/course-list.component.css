@@ -4,7 +4,7 @@
 
 .parallax {
   /* The image used */
-  background-image: url("../../../../../assets/images/abstract_outer_space_thinking_spiral_cosmo_indubitably_deep.jpg");
+  background-image: url("../../../../../assets/images/landing_page.jpg");
 
   /* Set a specific height */
   min-height: 100vh; 
@@ -19,4 +19,10 @@
 .text-center {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 5.5rem;
+}
+
+@media only screen and (max-width: 850px) {
+  .parallax {
+    background-image: url("../../../../../assets/images/landing_page_mobile.jpg");
+  }
 }
