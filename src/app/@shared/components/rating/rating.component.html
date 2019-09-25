@@ -15,5 +15,9 @@
     <input type="radio" formControlName="inputName" value="1" [checked]="rating===1" />
     <label title="Sucks big time" (click)='onClick(1)'>1 star</label>
   </fieldset>
-  <button class="btn btn-primary ml-3">Rate</button>
+  <button 
+    class="btn btn-primary ml-3"
+    [disabled]="ratingForm.controls.inputName.value === null">
+    Rate
+  </button>
 </form>

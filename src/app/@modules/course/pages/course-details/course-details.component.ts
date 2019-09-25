@@ -55,9 +55,12 @@ export class CourseDetailsComponent implements OnInit {
         .subscribe(
             updatedRating => {
                 this.course.rating = updatedRating;
-                this.course.voters++;
             }
         );
+
+        if (this.student.personalRating === 0) {
+            this.course.voters++;
+        }
     }
 
     onJoinCourse() {

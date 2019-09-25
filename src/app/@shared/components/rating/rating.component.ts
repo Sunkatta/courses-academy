@@ -12,14 +12,11 @@ export class RatingComponent implements OnInit {
   @Input() itemId: number;
   @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
 
-  inputName: string;
-
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.inputName = this.itemId + '_rating';
     this.ratingForm = this.formBuilder.group({
-      inputName: this.inputName
+      inputName: null
     });
   }
 
