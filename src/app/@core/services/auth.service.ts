@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserManager, UserManagerSettings, User } from 'oidc-client';
 import { environment } from 'src/environments/environment';
@@ -48,7 +48,33 @@ export class AuthService {
   }
 
   get name(): string {
-    return this.user != null ? this.user.profile.sub : '';
+    return this.user != null ? this.user.profile.given_name : '';
+  }
+
+  isAdmin(): Observable<boolean> {
+    return new Observable<boolean> (
+      observer => {
+        this.manager.getUser().then(
+          user => {
+            if (user.profile !== undefined && user.profile.roles !== undefined) {
+              if (user.profile.roles.find(r => r === 'Admin') !== undefined ) {
+                observer.next(true);
+                observer.complete();
+              }
+              observer.next(false);
+              observer.complete();
+            } else {
+              if (user.profile.role === 'Admin') {
+                observer.next(true);
+                observer.complete();
+              }
+              observer.next(false);
+              observer.complete();
+            }
+          }
+        );
+      }
+    );
   }
 }
 
