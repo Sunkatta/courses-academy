@@ -2,7 +2,6 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { User } from 'src/app/@shared/models/user/user.model';
 import { Subscription } from 'rxjs';
-import { UserService } from '../services/user.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
@@ -32,7 +31,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   subscription: Subscription;
   collapse = 'closed';
 
-  constructor(private authService: AuthService, private userService: UserService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.subscription = this.authService.authNavStatus$.subscribe(status => this.isAuthenticated = status);
@@ -41,10 +40,11 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     if (this.userAcquired === false && this.authService.name !== '') {
-      this.userService.getById(this.authService.name)
+      this.authService.isAdmin()
       .subscribe(
-        response => {
-          this.name = response.body.firstName;
+        (response: boolean) => {
+          this.name = this.authService.name;
+          this.isAdmin = response;
           this.userAcquired = true;
         }
       );
