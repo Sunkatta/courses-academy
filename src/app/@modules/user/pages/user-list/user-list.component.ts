@@ -9,7 +9,6 @@ import { User } from 'src/app/@shared/models/user/user.model';
 })
 export class UserListComponent implements OnInit {
   users: User[];
-  buttonMessage: string;
 
   constructor(private userService: UserService) { }
 
@@ -18,7 +17,6 @@ export class UserListComponent implements OnInit {
       .subscribe(
         response => {
           this.users = response.body;
-          console.log(this.users);
         }
       );
   }
