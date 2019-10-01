@@ -12,8 +12,8 @@ export class UserService {
 
     constructor(private http: HttpClient, private backendService: BackendService) { }
 
-    getAllUsers(): Observable<User[]> {
-        return this.http.get<User[]>(environment.apiUrl + 'users');
+    getAllUsers(): Observable<any> {
+        return this.backendService.backendRequest('get', 'Users', null, false);
     }
 
     deleteUser(id: number): Observable<any> {
