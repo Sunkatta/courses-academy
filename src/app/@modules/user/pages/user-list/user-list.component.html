@@ -5,6 +5,8 @@
         <th scope="col">Id</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
+        <th scope="col">Created On</th>
+        <th scope="col">Email Confirmed</th>
         <th scope="col">Roles</th>
         <th scope="col">Blocked</th>
       </tr>
@@ -13,7 +15,9 @@
       <tr *ngFor="let user of users">
         <th scope="row">{{ user.id }}</th>
         <td>{{ user?.firstName }} {{ user?.lastName || '' }}</td>
-        <td>{{ user.email }}</td>
+        <td>{{ user?.email }}</td>
+        <td>{{ user?.createdOn | date:'dd/mm/yyyy HH:MM' }}</td>
+        <td>{{ user?.emailConfirmed }}</td>
         <td >
           <p *ngFor="let role of user.roles">
             {{ role.type }}
