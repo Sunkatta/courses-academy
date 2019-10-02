@@ -1,13 +1,5 @@
-<button 
-  *ngIf="!user.blocked; else unblockBtn"
+<button
   class="btn btn-primary" 
   (click)="blockUser(user.id)">
   {{ blockBtnText }}
 </button>
-<ng-template #unblockBtn>
-  <button 
-    class="btn btn-primary" 
-    (click)="blockUser(user.id)">
-    {{ blockBtnText }}
-  </button>
-</ng-template>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/@shared/models/user/user.model';
 import { UserService } from 'src/app/@core/services/user.service';
 
@@ -9,6 +9,7 @@ import { UserService } from 'src/app/@core/services/user.service';
 })
 export class UserItemComponent implements OnInit {
   @Input() user: User;
+  @Output() isAdmin: EventEmitter<any> = new EventEmitter<any>();
   blockBtnText: string;
 
   constructor(private userService: UserService) { }
@@ -18,6 +19,14 @@ export class UserItemComponent implements OnInit {
   }
 
   blockUser(userId: string): void {
+    if (this.user.roles.find(r => r.type === 'Admin')) {
+      this.isAdmin.emit({
+        isAdmin: true,
+        message: 'Admins cannot be blocked!'
+      });
+      return;
+    }
+
     this.userService.blockUser({
       UserId: userId
     })

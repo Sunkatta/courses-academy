@@ -9,6 +9,8 @@ import { User } from 'src/app/@shared/models/user/user.model';
 })
 export class UserListComponent implements OnInit {
   users: User[];
+  isAdmin: boolean;
+  errorMessage: string;
 
   constructor(private userService: UserService) { }
 
@@ -19,5 +21,10 @@ export class UserListComponent implements OnInit {
           this.users = response.body;
         }
       );
+  }
+
+  showError(data: any) {
+    this.isAdmin = data.isAdmin;
+    this.errorMessage = data.message;
   }
 }
