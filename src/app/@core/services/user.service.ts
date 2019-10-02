@@ -29,6 +29,6 @@ export class UserService {
     }
 
     getById(id: string): Observable<any> {
-        return this.backendService.backendRequest('get', 'Users/' + id, null, true);
+        return this.backendService.backendRequest('get', 'Users/' + id, null, false);
     }
 }

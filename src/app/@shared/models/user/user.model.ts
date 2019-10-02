@@ -7,5 +7,5 @@ export class User {
     email: string;
     emailConfirmed: boolean;
     blocked: boolean;
-    role: UserRole;
+    roles: any;
 }
