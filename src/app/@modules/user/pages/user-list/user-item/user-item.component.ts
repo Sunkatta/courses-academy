@@ -14,18 +14,18 @@ export class UserItemComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.blockBtnText = this.user.isBlocked ? 'Unblock' : 'Block';
+    this.blockBtnText = this.user.blocked ? 'Unblock' : 'Block';
   }
 
-  blockUser(id: number): void {
-    // this.userService.getById(id)
-    //   .subscribe((response: User) => {
-    //     this.user.isBlocked = !response.isBlocked;
-
-    //     this.blockBtnText = this.user.isBlocked ? 'Unblock' : 'Block';
-
-    //     this.userService.addNewUser(this.user)
-    //       .subscribe();
-    //   });
+  blockUser(userId: string): void {
+    this.userService.blockUser({
+      UserId: userId
+    })
+    .subscribe(
+      (isBlocked: boolean) => {
+        this.user.blocked = isBlocked;
+        this.blockBtnText = this.user.blocked ? 'Unblock' : 'Block';
+      }
+    );
   }
 }
