@@ -60,7 +60,10 @@ export class AuthService {
       observer => {
         this.manager.getUser().then(
           user => {
-            if (user.profile !== undefined && user.profile.roles !== undefined) {
+            if (user === null) {
+              observer.next(false);
+              observer.complete();
+            } else if (user.profile.roles !== undefined) {
               if (user.profile.roles.find(r => r === 'Admin') !== undefined ) {
                 observer.next(true);
                 observer.complete();
