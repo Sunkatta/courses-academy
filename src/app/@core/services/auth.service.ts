@@ -51,6 +51,10 @@ export class AuthService {
     return this.user != null ? this.user.profile.given_name : '';
   }
 
+  get sub(): string {
+    return this.user != null ? this.user.profile.sub : '';
+  }
+
   isAdmin(): Observable<boolean> {
     return new Observable<boolean> (
       observer => {
