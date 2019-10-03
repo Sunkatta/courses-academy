@@ -63,7 +63,7 @@
                     <span class="fa fa-star" [ngClass]="{checked: course?.rating >= 5}"></span>
                 </div>
                 <span class="ml-3" *ngIf="course?.rating !== 0; else noVote">
-                    <b>{{ course?.rating }} stars out of 5 ({{ course?.voters }} votes)</b>
+                    <b>{{ course?.rating | number:'1.1-1' }} stars out of 5 ({{ course?.voters }} votes)</b>
                 </span>
                 <ng-template #noVote>
                     <span class="ml-3"><b>Be the first one to rate this course!</b></span>
