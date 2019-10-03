@@ -4,10 +4,10 @@ import { User } from 'src/app/@shared/models/user/user.model';
 
 @Component({
   selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  templateUrl: './user-table.component.html',
+  styleUrls: ['./user-table.component.css']
 })
-export class UserListComponent implements OnInit {
+export class UserTableComponent implements OnInit {
   users: User[];
   isAdmin: boolean;
   errorMessage: string;
