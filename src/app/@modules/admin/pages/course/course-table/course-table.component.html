@@ -1,1 +1,28 @@
-<h1>COURSE TABLE WORKS</h1>
+<div class="col-12 mt-3">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Enrolled Students</th>
+        <th scope="col">Voters</th>
+        <th scope="col">Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let course of courses">
+        <th scope="row">{{ course?.id }}</th>
+        <td>
+            <img src="{{ course?.image }}" alt="Course Image">
+        </td>
+        <td>{{ course?.title }}</td>
+        <td>{{ course?.description }}</td>
+        <td>{{ course?.rating | number:'1.1-1' }}</td>
+        <td>{{ course?.studentsCount }}</td>
+        <td>{{ course?.voters }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
