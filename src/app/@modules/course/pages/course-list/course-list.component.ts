@@ -36,10 +36,6 @@ export class CourseListComponent implements OnInit {
     );
   }
 
-  onAddCourse(): void {
-    this.router.navigateByUrl('/courses/add');
-  }
-
   onCourseDeleted(id: string): void {
     const index = this.courses.findIndex(c => c.id === id);
     if (index !== -1) {

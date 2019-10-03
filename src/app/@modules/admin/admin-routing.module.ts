@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { UserTableComponent } from './pages/user/user-table/user-table.component';
 import { CourseTableComponent } from './pages/course/course-table/course-table.component';
+import { CourseAddComponent } from './pages/course/course-add/course-add.component';
 
 const routes: Routes = [
     {
@@ -10,7 +11,13 @@ const routes: Routes = [
         component: AdminComponent,
         children: [
             { path: 'users', component: UserTableComponent },
-            { path: 'courses', component: CourseTableComponent }
+            {
+                path: 'courses',
+                children: [
+                    { path: '', component: CourseTableComponent },
+                    { path: 'add', component: CourseAddComponent }
+                ]
+            }
         ]
     }
 ];

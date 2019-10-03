@@ -5,13 +5,15 @@ import { UserTableComponent } from './pages/user/user-table/user-table.component
 import { UserItemComponent } from './pages/user/user-table/user-item/user-item.component';
 import { CommonModule } from '@angular/common';
 import { CourseTableComponent } from './pages/course/course-table/course-table.component';
+import { CourseAddComponent } from './pages/course/course-add/course-add.component';
 
 @NgModule({
     declarations: [
         AdminComponent,
         UserTableComponent,
         UserItemComponent,
-        CourseTableComponent
+        CourseTableComponent,
+        CourseAddComponent
     ],
     imports: [
         CommonModule,

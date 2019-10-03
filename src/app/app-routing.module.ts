@@ -3,7 +3,6 @@ import { CourseListComponent } from './@modules/course/pages/course-list/course-
 import { NgModule } from '@angular/core';
 import { LoginComponent } from './@modules/auth/pages/login/login.component';
 import { CourseComponent } from './@modules/course/pages/course/course.component';
-import { CourseAddComponent } from './@modules/course/pages/course-add/course-add.component';
 import { AdminGuard } from './@core/guards/admin.guard';
 import { RegisterComponent } from './@modules/auth/pages/register/register.component';
 import { CourseDetailsComponent } from './@modules/course/pages/course-details/course-details.component';
@@ -25,16 +24,6 @@ const routes: Routes = [
             {
                 path: ':id',
                 component: CourseDetailsComponent
-            },
-            {
-                path: 'add',
-                component: CourseAddComponent,
-                canActivate: [AdminGuard]
-            },
-            {
-                path: 'edit/:id',
-                component: CourseAddComponent,
-                canActivate: [AdminGuard]
             }
         ]
     },

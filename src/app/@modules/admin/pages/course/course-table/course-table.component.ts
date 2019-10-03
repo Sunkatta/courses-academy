@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'src/app/@core/services/course.service';
 import { Course } from 'src/app/@modules/course/models/course.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-course-table',
@@ -9,15 +10,20 @@ import { Course } from 'src/app/@modules/course/models/course.model';
 export class CourseTableComponent implements OnInit {
     courses: Course[];
 
-    constructor(private courseService: CourseService) { }
+    constructor(private courseService: CourseService,
+                private router: Router
+    ) { }
 
     ngOnInit() {
         this.courseService.getRawCourses()
         .subscribe(
             response => {
                 this.courses = response.body;
-                console.log(this.courses);
             }
         );
+    }
+
+    onAddCourse(): void {
+        this.router.navigateByUrl('admin/courses/add');
     }
 }

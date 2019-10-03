@@ -2,14 +2,6 @@
   <div class="parallax"></div>
   <h1 class="text-center mt-5">Courses Academy</h1>
   <hr style="width: 90%;">
-  <div class="row justify-content-end mr-3 mt-2">
-    <button 
-      *ngIf="isAdmin"
-      class="btn btn-primary" 
-      (click)="onAddCourse()">
-      Add new course
-    </button>
-  </div>
   <div class="row ml-4 mr-4">
     <div class="course-card col-md-2 m-5" *ngFor="let course of courses; let index = index">
       <app-course-item 

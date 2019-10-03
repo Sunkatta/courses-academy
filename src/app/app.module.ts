@@ -12,7 +12,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './@modules/auth/pages/login/login.component';
 import { RatingComponent } from './@shared/components/rating/rating.component';
 import { CourseComponent } from './@modules/course/pages/course/course.component';
-import { CourseAddComponent } from './@modules/course/pages/course-add/course-add.component';
 import { UserComponent } from './@modules/user/pages/user/user.component';
 import { RegisterComponent } from './@modules/auth/pages/register/register.component';
 import { CourseDetailsComponent } from './@modules/course/pages/course-details/course-details.component';
@@ -27,7 +26,6 @@ import { AdminModule } from './@modules/admin/admin.module';
     LoginComponent,
     RatingComponent,
     CourseComponent,
-    CourseAddComponent,
     CourseDetailsComponent,
     UserComponent,
     RegisterComponent,
