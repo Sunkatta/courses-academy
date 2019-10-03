@@ -24,7 +24,8 @@ export class CourseDetailsComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private courseService: CourseService,
                 private userService: UserService,
-                private authService: AuthService) {}
+                private authService: AuthService
+    ) {}
 
     ngOnInit() {
         this.subscription = this.authService.authNavStatus$.subscribe(status => this.isAuthenticated = status);
@@ -64,7 +65,7 @@ export class CourseDetailsComponent implements OnInit {
     }
 
     onJoinCourse() {
-        const userId = this.authService.name;
+        const userId = this.user.id;
         if (Object.keys(this.course.students).find(u => u === this.user.id) !== undefined) {
             return;
         }
@@ -88,7 +89,7 @@ export class CourseDetailsComponent implements OnInit {
     private GetCourseAndUser(courseId: any) {
         // if user is logged, fork join getting the course and the user.
         const courseObservable = this.courseService.getCourseById(courseId);
-        const userObservable = this.userService.getById(this.authService.name);
+        const userObservable = this.userService.getById(this.authService.sub);
 
         forkJoin([courseObservable, userObservable])
         .subscribe(
