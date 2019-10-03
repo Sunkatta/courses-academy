@@ -4,12 +4,14 @@ import { AdminComponent } from './admin.component';
 import { UserTableComponent } from './pages/user/user-table/user-table.component';
 import { UserItemComponent } from './pages/user/user-table/user-item/user-item.component';
 import { CommonModule } from '@angular/common';
+import { CourseTableComponent } from './pages/course/course-table/course-table.component';
 
 @NgModule({
     declarations: [
         AdminComponent,
         UserTableComponent,
-        UserItemComponent
+        UserItemComponent,
+        CourseTableComponent
     ],
     imports: [
         CommonModule,
