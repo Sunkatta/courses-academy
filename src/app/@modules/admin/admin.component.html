@@ -1,9 +1,9 @@
 <ul class="mt-3 col-md-12 text-center nav nav-tabs">
   <li class="col-md-6 nav-item">
-    <a class="nav-link active" href="#">Users</a>
+    <a class="nav-link" [routerLink]="['/admin/users']" routerLinkActive="active">Users</a>
   </li>
   <li class="col-md-6 nav-item">
-    <a class="nav-link" href="#">Courses</a>
+    <a class="nav-link" [routerLink]="['/admin/courses']" routerLinkActive="active">Courses</a>
   </li>
 </ul>
-<app-user-list></app-user-list>
+<router-outlet></router-outlet>
