@@ -4,8 +4,6 @@ import { NgModule } from '@angular/core';
 import { LoginComponent } from './@modules/auth/pages/login/login.component';
 import { CourseComponent } from './@modules/course/pages/course/course.component';
 import { CourseAddComponent } from './@modules/course/pages/course-add/course-add.component';
-import { UserComponent } from './@modules/user/pages/user/user.component';
-import { UserListComponent } from './@modules/user/pages/user-list/user-list.component';
 import { AdminGuard } from './@core/guards/admin.guard';
 import { RegisterComponent } from './@modules/auth/pages/register/register.component';
 import { CourseDetailsComponent } from './@modules/course/pages/course-details/course-details.component';
@@ -44,17 +42,6 @@ const routes: Routes = [
         path: 'admin',
         canActivateChild: [AdminGuard],
         loadChildren: () => import('./@modules/admin/admin.module').then(m => m.AdminModule)
-    },
-    {
-        path: 'users',
-        component: UserComponent,
-        canActivateChild: [AdminGuard],
-        children: [
-            {
-                path: '',
-                component: UserListComponent
-            }
-        ]
     },
     {
         path: 'login',

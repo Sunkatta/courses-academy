@@ -14,9 +14,7 @@ import { RatingComponent } from './@shared/components/rating/rating.component';
 import { CourseComponent } from './@modules/course/pages/course/course.component';
 import { CourseAddComponent } from './@modules/course/pages/course-add/course-add.component';
 import { UserComponent } from './@modules/user/pages/user/user.component';
-import { UserListComponent } from './@modules/user/pages/user-list/user-list.component';
 import { RegisterComponent } from './@modules/auth/pages/register/register.component';
-import { UserItemComponent } from './@modules/user/pages/user-list/user-item/user-item.component';
 import { CourseDetailsComponent } from './@modules/course/pages/course-details/course-details.component';
 import { AdminModule } from './@modules/admin/admin.module';
 
@@ -32,9 +30,7 @@ import { AdminModule } from './@modules/admin/admin.module';
     CourseAddComponent,
     CourseDetailsComponent,
     UserComponent,
-    UserListComponent,
     RegisterComponent,
-    UserItemComponent,
   ],
   imports: [
     BrowserModule,
