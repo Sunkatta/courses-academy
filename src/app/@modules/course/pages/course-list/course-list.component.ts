@@ -26,7 +26,7 @@ export class CourseListComponent implements OnInit {
       await this.authService.completeAuthentication();
     }
 
-    this.courseService.getAllCourses()
+    this.courseService.getCoursesPreview()
     .subscribe(
       response => {
         response.body.forEach(course => {

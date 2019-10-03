@@ -12,7 +12,11 @@ export class CourseService {
 
   constructor(private http: HttpClient, private backendService: BackendService) { }
 
-  getAllCourses(): Observable<any> {
+  getRawCourses(): Observable<any> {
+    return this.backendService.backendRequest('get', 'Courses/GetRawCourses', null, false);
+  }
+
+  getCoursesPreview(): Observable<any> {
     return this.backendService.backendRequest('get', 'Courses', null, false);
   }
 
