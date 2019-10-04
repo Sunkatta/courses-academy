@@ -16,6 +16,7 @@
         <th scope="col">Rating</th>
         <th scope="col">Enrolled Students</th>
         <th scope="col">Voters</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -29,6 +30,9 @@
         <td>{{ course?.rating | number:'1.1-1' }}</td>
         <td>{{ course?.studentsCount }}</td>
         <td>{{ course?.voters }}</td>
+        <td>
+          <app-course-actions [course]="course"></app-course-actions>
+        </td>
       </tr>
     </tbody>
   </table>

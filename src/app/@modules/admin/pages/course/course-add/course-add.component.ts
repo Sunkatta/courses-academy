@@ -48,7 +48,7 @@ export class CourseAddComponent implements OnInit {
     })
     .subscribe(
       () => {
-        this.router.navigateByUrl('courses');
+        this.router.navigateByUrl('admin/courses');
       }
     );
   }
