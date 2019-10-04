@@ -5,10 +5,13 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-course-table',
-    templateUrl: './course-table.component.html'
+    templateUrl: './course-table.component.html',
+    styleUrls: ['./course-table.component.css']
 })
 export class CourseTableComponent implements OnInit {
     courses: Course[];
+    successMessage = false;
+    message: string;
 
     constructor(private courseService: CourseService,
                 private router: Router
@@ -28,6 +31,9 @@ export class CourseTableComponent implements OnInit {
     }
 
     updateCourseTable(data: any) {
+        window.scroll(0, 0);
         this.courses = data.courses;
+        this.message = data.message;
+        this.successMessage = true;
     }
 }

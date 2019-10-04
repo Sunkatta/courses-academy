@@ -22,7 +22,8 @@ export class CourseActionsComponent {
         .subscribe(
             response => {
                 this.courseDeleted.emit({
-                    courses: response
+                    courses: response,
+                    message: 'Course \'' + this.course.title + '\' successfully deleted!'
                 });
             }
         );
