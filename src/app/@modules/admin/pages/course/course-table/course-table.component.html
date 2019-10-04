@@ -31,7 +31,10 @@
         <td>{{ course?.studentsCount }}</td>
         <td>{{ course?.voters }}</td>
         <td>
-          <app-course-actions [course]="course"></app-course-actions>
+          <app-course-actions 
+            [course]="course"
+            (courseDeleted)="updateCourseTable($event)">
+          </app-course-actions>
         </td>
       </tr>
     </tbody>

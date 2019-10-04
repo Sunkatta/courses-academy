@@ -32,8 +32,8 @@ export class CourseService {
     // return this.http.post(environment.apiUrl + 'courses', course);
   }
 
-  deleteCourse(id: string): Observable<any> {
-    return this.http.delete(environment.apiUrl + 'courses/' + id);
+  deleteCourse(data: any): Observable<any> {
+    return this.backendService.backendRequest('post', 'Courses/DeleteCourse', data, false);
   }
 
   updateCourse(data: any): Observable<any> {

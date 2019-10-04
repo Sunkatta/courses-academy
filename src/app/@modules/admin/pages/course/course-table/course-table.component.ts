@@ -26,4 +26,8 @@ export class CourseTableComponent implements OnInit {
     onAddCourse(): void {
         this.router.navigateByUrl('admin/courses/add');
     }
+
+    updateCourseTable(data: any) {
+        this.courses = data.courses;
+    }
 }
