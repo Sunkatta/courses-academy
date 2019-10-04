@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CourseService } from 'src/app/@core/services/course.service';
-import { Student } from '../../../../course/models/student.model';
 
 @Component({
   selector: 'app-course-add',
@@ -54,7 +53,7 @@ export class CourseAddComponent implements OnInit {
     })
     .subscribe(
       () => {
-        this.router.navigateByUrl('admin/courses');
+        this.router.navigateByUrl('admin/courses?title=' + this.courseForm.controls.title.value);
       }
     );
   }

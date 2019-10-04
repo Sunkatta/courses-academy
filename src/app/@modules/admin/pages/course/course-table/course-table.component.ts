@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'src/app/@core/services/course.service';
 import { Course } from 'src/app/@modules/course/models/course.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-course-table',
@@ -14,10 +14,16 @@ export class CourseTableComponent implements OnInit {
     message: string;
 
     constructor(private courseService: CourseService,
-                private router: Router
+                private router: Router,
+                private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
+        if (this.route.snapshot.queryParams.title) {
+            this.successMessage = true;
+            this.message = 'Course \'' + this.route.snapshot.queryParams.title + '\' created successfuly!';
+        }
+
         this.courseService.getRawCourses()
         .subscribe(
             response => {
