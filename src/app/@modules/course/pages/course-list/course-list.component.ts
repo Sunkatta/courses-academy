@@ -26,7 +26,7 @@ export class CourseListComponent implements OnInit {
       await this.authService.completeAuthentication();
     }
 
-    this.courseService.getAllCourses()
+    this.courseService.getCoursesPreview()
     .subscribe(
       response => {
         response.body.forEach(course => {
@@ -34,10 +34,6 @@ export class CourseListComponent implements OnInit {
         });
       }
     );
-  }
-
-  onAddCourse(): void {
-    this.router.navigateByUrl('/courses/add');
   }
 
   onCourseDeleted(id: string): void {

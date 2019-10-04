@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CourseService } from 'src/app/@core/services/course.service';
-import { Student } from '../../models/student.model';
 
 @Component({
   selector: 'app-course-add',
@@ -20,33 +19,41 @@ export class CourseAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      if (params.id) {
-        this.courseService.getCourseById(params.id).subscribe((user) => {
-          this.createForm();
-          this.courseForm.patchValue({...user});
-        });
+    this.route.params
+    .subscribe(
+      (params) => {
+        if (params.id) {
+          this.courseService.getCourseById(params.id)
+          .subscribe(
+            response => {
+              this.createForm();
+              this.courseForm.patchValue({...response.body});
+            }
+          );
+        }
       }
-    });
+    );
 
     this.createForm();
   }
 
   private createForm(): void {
     this.courseForm = this.formBuilder.group({
-      id: [''],
       title: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(3)]],
-      image: ['https://picsum.photos/200/300', Validators.required],
-      students: [new Array<Student>()],
-      rating: [0]
+      image: [{value: 'https://picsum.photos/217/217', disabled: true} /*, Validators.required */]
     });
   }
 
   onFormSubmit(): void {
-    this.courseService.addNewCourse(this.courseForm.value).subscribe(
+    this.courseService.addNewCourse({
+      Title: this.courseForm.controls.title.value,
+      Description: this.courseForm.controls.description.value,
+      Image: this.courseForm.controls.image.value
+    })
+    .subscribe(
       () => {
-        this.router.navigateByUrl('courses');
+        this.router.navigateByUrl('admin/courses?title=' + this.courseForm.controls.title.value);
       }
     );
   }

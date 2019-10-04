@@ -1,0 +1,48 @@
+<div *ngIf="successMessage" class="alert alert-success alert-dismissible" role="alert">
+  {{ message }}
+  <button (click)="successMessage = !successMessage" type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="row justify-content-end mr-3 mt-4">
+    <button
+      class="btn btn-primary" 
+      (click)="onAddCourse()">
+      Add new course
+    </button>
+</div>
+<div class="col-12 mt-3">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Image</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Enrolled Students</th>
+        <th scope="col">Voters</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let course of courses">
+        <th scope="row">{{ course?.id }}</th>
+        <td>
+            <img class="courseImg" src="{{ course?.image }}" alt="Course Image">
+        </td>
+        <td>{{ course?.title }}</td>
+        <td>{{ course?.description }}</td>
+        <td>{{ course?.rating | number:'1.1-1' }}</td>
+        <td>{{ course?.studentsCount }}</td>
+        <td>{{ course?.voters }}</td>
+        <td>
+          <app-course-actions 
+            [course]="course"
+            (courseDeleted)="updateCourseTable($event)">
+          </app-course-actions>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

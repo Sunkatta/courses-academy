@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { UserService } from './user.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserManager, UserManagerSettings, User } from 'oidc-client';
 import { environment } from 'src/environments/environment';
@@ -17,33 +16,12 @@ export class AuthService {
   private manager = new UserManager(getClientSettings());
   public user: User | null;
 
-  constructor(/*private userService: UserService,*/ private router: Router) {
+  constructor(private router: Router) {
     this.manager.getUser().then(user => {
       this.user = user;
       this.authNavStatusSource.next(this.isAuthenticated());
     });
   }
-
-  // public getLoggedUser(): Observable<User> {
-  //   if (+sessionStorage.getItem('loggedUserId') === 0) {
-  //     this.router.navigateByUrl('courses');
-  //   } else {
-  //     return new Observable<User>(
-  //       (observer) => {
-  //         this.userService.getById(+sessionStorage.getItem('loggedUserId'))
-  //         .subscribe(
-  //         (response: any) => {
-  //           observer.next(response);
-  //           observer.complete();
-  //         },
-  //           () => {
-  //             this.signout();
-  //           }
-  //         );
-  //       }
-  //     );
-  //   }
-  // }
 
   login() {
     return this.manager.signinRedirect();
@@ -70,7 +48,40 @@ export class AuthService {
   }
 
   get name(): string {
+    return this.user != null ? this.user.profile.given_name : '';
+  }
+
+  get sub(): string {
     return this.user != null ? this.user.profile.sub : '';
+  }
+
+  isAdmin(): Observable<boolean> {
+    return new Observable<boolean> (
+      observer => {
+        this.manager.getUser().then(
+          user => {
+            if (user === null) {
+              observer.next(false);
+              observer.complete();
+            } else if (user.profile.roles !== undefined) {
+              if (user.profile.roles.find(r => r === 'Admin') !== undefined ) {
+                observer.next(true);
+                observer.complete();
+              }
+              observer.next(false);
+              observer.complete();
+            } else {
+              if (user.profile.role === 'Admin') {
+                observer.next(true);
+                observer.complete();
+              }
+              observer.next(false);
+              observer.complete();
+            }
+          }
+        );
+      }
+    );
   }
 }
 

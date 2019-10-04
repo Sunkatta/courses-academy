@@ -5,7 +5,7 @@ export class User {
     firstName: string;
     lastName: string;
     email: string;
-    password: string;
-    role: UserRole;
-    isBlocked: boolean;
+    emailConfirmed: boolean;
+    blocked: boolean;
+    roles: any;
 }

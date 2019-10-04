@@ -12,19 +12,23 @@ export class UserService {
 
     constructor(private http: HttpClient, private backendService: BackendService) { }
 
-    getAllUsers(): Observable<User[]> {
-        return this.http.get<User[]>(environment.apiUrl + 'users');
+    addNewUser(user: any): Observable<any> {
+        return this.backendService.backendRequest('post', 'Account/Register', user, false);
+    }
+
+    blockUser(data: any): Observable<any> {
+        return this.backendService.backendRequest('post', 'Users/BlockUnblockUser', data, false);
     }
 
     deleteUser(id: number): Observable<any> {
         return this.http.delete(environment.apiUrl + 'users/' + id);
     }
 
-    addNewUser(user: any): Observable<any> {
-        return this.backendService.backendRequest('post', 'Account/Register', user, false);
+    getAllUsers(): Observable<any> {
+        return this.backendService.backendRequest('get', 'Users', null, false);
     }
 
     getById(id: string): Observable<any> {
-        return this.backendService.backendRequest('get', 'Users/' + id, null, true);
+        return this.backendService.backendRequest('get', 'Users/' + id, null, false);
     }
 }

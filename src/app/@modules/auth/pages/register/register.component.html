@@ -1,14 +1,16 @@
 <div class="register-holder">
   <div class="container">
     <div class="form-holder">
-      <h3>Register</h3>
+      <h3 class="text-center">Register</h3>
       <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
         <div class="row">
           <div class="col-12">
-            <span class="text-danger">{{ failedRegisterMsg }}</span>
+            <div class="text-center">
+              <h5 class="text-danger">{{ failedRegisterMsg }}</h5>
+            </div>
             <div class="form-group">
               <label>Name</label>
-              <input type="text" class="form-control" formControlName="name">
+              <input type="text" class="form-control" placeholder="John Doe" formControlName="name">
               <span
                 *ngIf="!registerForm.get('name').valid && registerForm.get('name').touched"
                 class="text-danger">
@@ -16,7 +18,7 @@
                     This field is required!
                   </span>
                   <span *ngIf="registerForm.get('name').errors.minlength">
-                    The min length should be 3!
+                    The name should be at least 3 characters long!
                   </span>
               </span>
             </div>
@@ -26,7 +28,11 @@
           <div class="col-12">
             <div class="form-group">
               <label>Email</label>
-              <input type="email" class="form-control" formControlName="email">
+              <input 
+                type="email"
+                class="form-control"
+                placeholder="johndoe@example.com"
+                formControlName="email">
               <span
                 *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched"
                 class="text-danger">
@@ -44,7 +50,11 @@
           <div class="col-12">
             <div class="form-group">
               <label>Password</label>
-              <input type="password" class="form-control" formControlName="password">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Must be at least 5 characters long"
+                formControlName="password">
               <span
                 *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched"
                 class="text-danger">
@@ -62,7 +72,7 @@
           <div class="col-12">
             <button 
               type="submit" 
-              class="btn btn-primary"
+              class="btn btn-outline-success"
               [disabled]="!registerForm.valid">
               Register
             </button>
