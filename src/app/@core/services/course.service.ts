@@ -24,11 +24,12 @@ export class CourseService {
     return this.backendService.backendRequest('get', 'Courses/' + id, null, false);
   }
 
-  addNewCourse(course: Course): Observable<any> {
-    if (course.id) {
-      return this.http.put(`${environment.apiUrl}courses/${course.id}`, course);
-    }
-    return this.http.post(environment.apiUrl + 'courses', course);
+  addNewCourse(data: any): Observable<any> {
+    return this.backendService.backendRequest('post', 'Courses/CreateCourse', data, false);
+    // if (course.id) {
+    //   return this.http.put(`${environment.apiUrl}courses/${course.id}`, course);
+    // }
+    // return this.http.post(environment.apiUrl + 'courses', course);
   }
 
   deleteCourse(id: string): Observable<any> {

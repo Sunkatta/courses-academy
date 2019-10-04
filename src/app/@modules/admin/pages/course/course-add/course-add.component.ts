@@ -34,17 +34,19 @@ export class CourseAddComponent implements OnInit {
 
   private createForm(): void {
     this.courseForm = this.formBuilder.group({
-      id: [''],
       title: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(3)]],
-      image: ['https://picsum.photos/200/300', Validators.required],
-      students: [new Array<Student>()],
-      rating: [0]
+      image: [{value: 'https://picsum.photos/217/217', disabled: true} /*, Validators.required */]
     });
   }
 
   onFormSubmit(): void {
-    this.courseService.addNewCourse(this.courseForm.value).subscribe(
+    this.courseService.addNewCourse({
+      Title: this.courseForm.controls.title.value,
+      Description: this.courseForm.controls.description.value,
+      Image: this.courseForm.controls.image.value
+    })
+    .subscribe(
       () => {
         this.router.navigateByUrl('courses');
       }
