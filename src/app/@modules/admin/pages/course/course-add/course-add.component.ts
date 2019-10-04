@@ -20,14 +20,20 @@ export class CourseAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      if (params.id) {
-        this.courseService.getCourseById(params.id).subscribe((user) => {
-          this.createForm();
-          this.courseForm.patchValue({...user});
-        });
+    this.route.params
+    .subscribe(
+      (params) => {
+        if (params.id) {
+          this.courseService.getCourseById(params.id)
+          .subscribe(
+            response => {
+              this.createForm();
+              this.courseForm.patchValue({...response.body});
+            }
+          );
+        }
       }
-    });
+    );
 
     this.createForm();
   }
