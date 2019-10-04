@@ -20,14 +20,6 @@ export class CourseItemComponent implements OnInit {
 
   ngOnInit() { }
 
-  onDeleteClicked() {
-    this.delete.emit(this.course.id);
-  }
-
-  onCourseEdit() {
-    this.router.navigate(['courses/edit', this.course.id]);
-  }
-
   onCourseSelected(id: string) {
     this.router.navigateByUrl('courses/' + id);
   }
