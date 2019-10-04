@@ -6,6 +6,7 @@ import { UserItemComponent } from './pages/user/user-table/user-item/user-item.c
 import { CommonModule } from '@angular/common';
 import { CourseTableComponent } from './pages/course/course-table/course-table.component';
 import { CourseAddComponent } from './pages/course/course-add/course-add.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,8 @@ import { CourseAddComponent } from './pages/course/course-add/course-add.compone
     ],
     imports: [
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
         AdminRoutingModule
     ],
     schemas: [ NO_ERRORS_SCHEMA ]
