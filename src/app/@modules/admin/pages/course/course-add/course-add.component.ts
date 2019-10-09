@@ -10,6 +10,7 @@ import { CourseService } from 'src/app/@core/services/course.service';
 })
 export class CourseAddComponent implements OnInit {
   courseForm: FormGroup;
+  courseId: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,12 +22,13 @@ export class CourseAddComponent implements OnInit {
   ngOnInit() {
     this.route.params
     .subscribe(
-      (params) => {
+      params => {
         if (params.id) {
           this.courseService.getCourseById(params.id)
           .subscribe(
             response => {
               this.createForm();
+              this.courseId = params.id;
               this.courseForm.patchValue({...response.body});
             }
           );
@@ -46,6 +48,33 @@ export class CourseAddComponent implements OnInit {
   }
 
   onFormSubmit(): void {
+    this.route.params
+    .subscribe(
+      params => {
+        if (params.id) {
+          this.updateCourse();
+        } else {
+          this.addCourse();
+        }
+      }
+    );
+  }
+
+  private updateCourse() {
+    this.courseService.updateCourse({
+      CourseId: this.courseId,
+      Title: this.courseForm.controls.title.value,
+      Description: this.courseForm.controls.description.value,
+      Image: this.courseForm.controls.image.value
+    })
+    .subscribe(
+      () => {
+        this.router.navigateByUrl('admin/courses?update=success&title=' + this.courseForm.controls.title.value);
+      }
+    );
+  }
+
+  private addCourse() {
     this.courseService.addNewCourse({
       Title: this.courseForm.controls.title.value,
       Description: this.courseForm.controls.description.value,
@@ -53,7 +82,7 @@ export class CourseAddComponent implements OnInit {
     })
     .subscribe(
       () => {
-        this.router.navigateByUrl('admin/courses?title=' + this.courseForm.controls.title.value);
+        this.router.navigateByUrl('admin/courses?create=success&title=' + this.courseForm.controls.title.value);
       }
     );
   }

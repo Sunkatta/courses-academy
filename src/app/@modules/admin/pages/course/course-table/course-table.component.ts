@@ -24,7 +24,12 @@ export class CourseTableComponent implements OnInit {
     ngOnInit() {
         if (this.route.snapshot.queryParams.title) {
             this.showAlert = true;
-            this.message = 'Course \'' + this.route.snapshot.queryParams.title + '\' created successfuly!';
+            this.isSuccessful = true;
+            if (this.route.snapshot.queryParams.create) {
+                this.message = 'Course \'' + this.route.snapshot.queryParams.title + '\' created successfuly!';
+            } else if (this.route.snapshot.queryParams.update) {
+                this.message = 'Course \'' + this.route.snapshot.queryParams.title + '\' updated successfuly!';
+            }
         }
 
         this.courseService.getRawCourses()
@@ -40,6 +45,7 @@ export class CourseTableComponent implements OnInit {
     }
 
     onDeleteClicked(course: Course) {
+        window.scroll(0, 0);
         this.isForDeletion = true;
         this.courseForDeletion = course;
         this. message =
