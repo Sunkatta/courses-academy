@@ -60,6 +60,7 @@ export class CourseDetailsComponent implements OnInit {
         );
 
         if (this.student.personalRating === 0) {
+            this.student.personalRating = clickObj.rating;
             this.course.voters++;
         }
     }
