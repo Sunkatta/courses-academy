@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Course } from 'src/app/@modules/course/models/course.model';
-import { environment } from '../../../environments/environment';
 import { BackendService } from './backend.service';
 
 @Injectable({
@@ -10,7 +7,7 @@ import { BackendService } from './backend.service';
 })
 export class CourseService {
 
-  constructor(private http: HttpClient, private backendService: BackendService) { }
+  constructor(private backendService: BackendService) { }
 
   getRawCourses(): Observable<any> {
     return this.backendService.backendRequest('get', 'Courses/GetRawCourses', null, false);

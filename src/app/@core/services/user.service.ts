@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/@shared/models/user/user.model';
-import { environment } from 'src/environments/environment';
 import { BackendService } from './backend.service';
 
 @Injectable({
@@ -10,7 +7,7 @@ import { BackendService } from './backend.service';
 })
 export class UserService {
 
-    constructor(private http: HttpClient, private backendService: BackendService) { }
+    constructor(private backendService: BackendService) { }
 
     addNewUser(user: any): Observable<any> {
         return this.backendService.backendRequest('post', 'Account/Register', user, false);
@@ -18,10 +15,6 @@ export class UserService {
 
     blockUser(data: any): Observable<any> {
         return this.backendService.backendRequest('post', 'Users/BlockUnblockUser', data, false);
-    }
-
-    deleteUser(id: number): Observable<any> {
-        return this.http.delete(environment.apiUrl + 'users/' + id);
     }
 
     getAllUsers(): Observable<any> {
