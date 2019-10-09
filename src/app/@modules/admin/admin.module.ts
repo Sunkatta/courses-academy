@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { CourseTableComponent } from './pages/course/course-table/course-table.component';
 import { CourseAddComponent } from './pages/course/course-add/course-add.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CourseActionsComponent } from './pages/course/course-table/course-button/course-actions.component';
 
 @NgModule({
     declarations: [
@@ -16,7 +15,6 @@ import { CourseActionsComponent } from './pages/course/course-table/course-butto
         UserItemComponent,
         CourseTableComponent,
         CourseAddComponent,
-        CourseActionsComponent
     ],
     imports: [
         CommonModule,
