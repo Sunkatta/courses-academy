@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Course } from '../../../models/course.model';
 import { Router } from '@angular/router';
 
@@ -9,10 +9,6 @@ import { Router } from '@angular/router';
 })
 export class CourseItemComponent implements OnInit {
   @Input() course: Course;
-  @Output() delete = new EventEmitter<string>();
-
-  ratingClicked: number;
-  isAdmin = false;
 
   constructor(
     private router: Router

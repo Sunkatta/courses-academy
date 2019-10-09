@@ -5,8 +5,7 @@
   <div class="row ml-4 mr-4">
     <div class="course-card col-md-2 m-5" *ngFor="let course of courses; let index = index">
       <app-course-item 
-        [course]="course"
-        (delete)="onCourseDeleted($event)">
+        [course]="course">
       </app-course-item>
     </div>
   </div>
