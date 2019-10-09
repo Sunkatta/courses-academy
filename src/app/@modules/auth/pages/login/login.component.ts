@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/@core/services/auth.service';
 
 @Component({
@@ -13,9 +12,8 @@ export class LoginComponent implements OnInit {
   failedLoginMsg: string;
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router,
-              private authService: AuthService) {
-  }
+              private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
