@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Course } from '../../../models/course.model';
 import { Router } from '@angular/router';
+
+import { Course } from '../../../models/course.model';
 
 @Component({
   selector: 'app-course-item',

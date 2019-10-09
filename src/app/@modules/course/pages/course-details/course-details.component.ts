@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { CourseService } from 'src/app/@core/services/course.service';
 import { Course } from '../../models/course.model';
 import { Subscription, forkJoin } from 'rxjs';

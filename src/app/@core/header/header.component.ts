@@ -1,8 +1,9 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+
 import { AuthService } from '../services/auth.service';
 import { User } from 'src/app/@shared/models/user/user.model';
 import { Subscription } from 'rxjs';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-header',

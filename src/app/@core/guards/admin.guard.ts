@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { Router, Route, UrlSegment } from '@angular/router';
+
+import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
