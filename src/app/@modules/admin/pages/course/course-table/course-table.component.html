@@ -1,8 +1,17 @@
-<div *ngIf="successMessage" class="alert alert-success alert-dismissible" role="alert">
-  {{ message }}
-  <button (click)="successMessage = !successMessage" type="button" class="close" data-dismiss="alert" aria-label="Close">
+<div 
+  *ngIf="showAlert"
+  [ngClass]="{'alert-success': isSuccessful, 'alert-warning': isForDeletion}"
+  class="alert alert-success alert-dismissible text-center"
+  role="alert"
+  >
+  <div [innerHTML]="message"></div>
+  <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
+  <div class="mt-3" *ngIf="isForDeletion">
+    <button (click)="deleteCourse()" class="btn btn-outline-danger mr-4">Yes, Delete</button>
+    <button (click)="closeAlert()" class="btn btn btn-outline-secondary">No, I changed my mind</button>
+  </div>
 </div>
 <div class="row justify-content-end mr-3 mt-4">
     <button
@@ -37,10 +46,17 @@
         <td>{{ course?.studentsCount }}</td>
         <td>{{ course?.voters }}</td>
         <td>
-          <app-course-actions 
-            [course]="course"
-            (courseDeleted)="updateCourseTable($event)">
-          </app-course-actions>
+          <button 
+              class="btn btn-danger" 
+              tooltip="Delete" 
+              placement="top" 
+              container="body" 
+              (click)="onDeleteClicked(course)">
+              X
+          </button>
+          <button class="btn btn-primary mt-2" (click)="onCourseEdit(course?.id)">
+              Edit
+          </button>
         </td>
       </tr>
     </tbody>

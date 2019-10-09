@@ -1,6 +1,6 @@
-.alert-success {
+.alert-success, .alert-warning {
     margin: 0 auto;
-    width: 35%;
+    width: 50%;
     margin-top: 1rem;
 }
 
