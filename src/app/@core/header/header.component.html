@@ -15,11 +15,11 @@
     </ul>
     <div *ngIf="isAuthenticated; else authenticate">
       Hello, {{ name }}
-      <button (click)="logout()" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
+      <button (click)="logout()" class="btn btn-outline-dark my-2 my-sm-0">Logout</button>
     </div>
     <ng-template #authenticate>
-      <button (click)="login()" class="btn btn-outline-success my-2 my-sm-0 mr-2">Login</button>
-      <button routerLink="/register" class="btn btn-outline-success my-2 my-sm-0">Register</button>
+      <button (click)="login()" class="btn btn-outline-dark my-2 my-sm-0 mr-2">Login</button>
+      <button routerLink="/register" class="btn btn-outline-dark my-2 my-sm-0">Register</button>
     </ng-template>
   </div>
 </nav>

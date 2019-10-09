@@ -15,12 +15,12 @@
     color: rgb(212, 212, 212);
 }
 
-.btn-outline-success {
+.btn-outline-dark {
     color: white;
     border-color: white;
 }
 
-.btn-outline-success:hover {
+.btn-outline-dark:hover {
     background: rgb(150, 150, 150);
 }
 
