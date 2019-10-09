@@ -30,10 +30,11 @@
           </p>
         </td>
         <td>
-          <app-user-item 
-            [user]="user"
-            (isAdmin)="showError($event)">
-          </app-user-item>
+          <button
+            class="btn btn-primary" 
+            (click)="blockUser(user)">
+            {{ user?.blocked === true ? 'Unblock' : 'Block' }}
+          </button>
         </td>
       </tr>
     </tbody>

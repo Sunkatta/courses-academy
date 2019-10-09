@@ -11,6 +11,7 @@ export class UserTableComponent implements OnInit {
   users: User[];
   isAdmin: boolean;
   errorMessage: string;
+  blockBtnText: string;
 
   constructor(private userService: UserService) { }
 
@@ -26,5 +27,23 @@ export class UserTableComponent implements OnInit {
   showError(data: any) {
     this.isAdmin = data.isAdmin;
     this.errorMessage = data.message;
+  }
+
+  blockUser(user: User): void {
+    if (user.roles.find(r => r.type === 'Admin')) {
+      this.isAdmin = true,
+      this.errorMessage = 'Admins cannot be blocked!';
+      return;
+    }
+
+    this.userService.blockUser({
+      UserId: user.id
+    })
+    .subscribe(
+      (isBlocked: boolean) => {
+        user.blocked = isBlocked;
+        this.blockBtnText = user.blocked ? 'Unblock' : 'Block';
+      }
+    );
   }
 }
