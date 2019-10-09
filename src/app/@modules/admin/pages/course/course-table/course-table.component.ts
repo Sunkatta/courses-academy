@@ -13,7 +13,7 @@ export class CourseTableComponent implements OnInit {
     showAlert = false;
     message: string;
     isForDeletion: boolean;
-    isSuccessful: boolean;
+    isAlertSuccess: boolean;
     courseForDeletion: Course;
 
     constructor(private courseService: CourseService,
@@ -24,7 +24,7 @@ export class CourseTableComponent implements OnInit {
     ngOnInit() {
         if (this.route.snapshot.queryParams.title) {
             this.showAlert = true;
-            this.isSuccessful = true;
+            this.isAlertSuccess = true;
             if (this.route.snapshot.queryParams.create) {
                 this.message = 'Course \'' + this.route.snapshot.queryParams.title + '\' created successfuly!';
             } else if (this.route.snapshot.queryParams.update) {
@@ -64,7 +64,7 @@ export class CourseTableComponent implements OnInit {
                 this.courses = response,
                 this.message = 'Course \'' + this.courseForDeletion.title + '\' successfully deleted!';
                 this.isForDeletion = false;
-                this.isSuccessful = true;
+                this.isAlertSuccess = true;
             }
         );
     }
