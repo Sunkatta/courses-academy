@@ -57,13 +57,12 @@ export class CourseDetailsComponent implements OnInit {
         .subscribe(
             updatedRating => {
                 this.course.rating = updatedRating;
+                if (this.student.personalRating === 0) {
+                    this.student.personalRating = clickObj.rating;
+                    this.course.voters++;
+                }
             }
         );
-
-        if (this.student.personalRating === 0) {
-            this.student.personalRating = clickObj.rating;
-            this.course.voters++;
-        }
     }
 
     onJoinCourse() {
@@ -80,6 +79,10 @@ export class CourseDetailsComponent implements OnInit {
             () => {
                 this.canAssign = false;
                 this.course.studentsCount++;
+                this.student = {
+                    id: userId,
+                    personalRating: 0
+                };
             }
         );
     }
